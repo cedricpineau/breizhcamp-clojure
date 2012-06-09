@@ -1,0 +1,300 @@
+
+<!--#JVM#-->
+<br><br>
+<h1>Un langage sur la JVM</h1>
+<br>
+<ul>
+  <li>construit avec et sur l'écosystème</li>
+  <li>compilé en bytecode (jamais interpreté), à la volée ou "Ahead Of Time"</li>
+  <li>parfaitement intégré au langage Java</li>
+</ul>
+<!--/-->
+
+<!--#Symbiotique#-->
+<br><br>
+<h1>Construit avec et sur l'écosystème</h1>
+<br>
+<ul>
+  <li>toutes les librairies sont accessibles</li>
+  <li>les outils de développement, de profilage, de monitoring, </li>
+  <li>Les outils et frameworks Clojure ne sont souvent que des surcouches</li>
+</ul>
+<br>
+On ne réécrit pas les drivers JDBC ou les serveurs Web !
+<!--/-->
+
+<!--#Interopérable#-->
+<br><br>
+<h1>Interopérable avec Java</h1>
+
+<pre class="brush: clojure;">
+(Widget. "red") ; instantiation
+
+(.nextInt rnd) ; appel de méthode
+
+static Math/PI ; variable statique
+
+(javax.swing.JOptionPane/showMessageDialog 
+  nil "Bonjour BreizhCampeurs !")
+  ; méthode statique
+
+</pre>
+<!--/-->
+
+<!--#Interopérable2#-->
+<br>
+<h1>Et pour aller (un peu) plus loin</h1>
+<pre class="brush: clojure;">
+(.. person getAdress getZipCode)
+  ; accès chainé : moins de () qu'en java !
+
+(def salueur 
+  (reify Runnable
+    (run [this]
+      (println "Bonjour BreizhCampeurs !"))))
+;= #'user/salueur
+(.run salueur)
+; Bonjour BreizhCampeurs !
+;= nil
+</pre>
+<!--/-->
+
+<!--#Interopérable3#-->
+<pre class="brush: clojure;">
+(import '(javax.swing JFrame JPanel JButton 
+  JOptionPane) 'java.awt.event.ActionListener)
+
+(def button (JButton. "Click Me!"))
+(def panel (doto (JPanel.)
+             (.add button)))
+(def frame (doto (JFrame. "Hello Frame")
+             (.setSize 200 200)
+             (.setContentPane panel)
+             (.setVisible true)))
+(defn say-hello []
+  (JOptionPane/showMessageDialog nil 
+    "Hello BreizhCampeurs !" "Greeting" 
+    JOptionPane/INFORMATION_MESSAGE))
+
+(.addActionListener button (reify ActionListener
+  (actionPerformed [this event] (say-hello))))
+</pre>
+<!--/-->
+
+
+
+<!--#Abstractions#-->
+<br>
+<h1>les abstractions de constructions du langage</h1>
+<br>
+Les protocols et les datatypes ont été introduits avec Clojure 1.2 de manière à ce que le langage dispose de ses propres abstractions pour définir ses librairies
+<br><br>
+Avant cela les Sequence, Collection, etc étaient définis en terme d'interface Java et leurs implémentations sous la forme de classe, ce qui rendait le langage dépendant de la plateforme sous-jacente
+<!--/-->
+
+<!--#ExpressionProblem1#-->
+<br><br><br><br>
+<h1>Le second objectif était d'apporter une réponse à l'"Expression Problem"<br><br> Comment faciliter l'évolution des programmes<br> par l'ajout de traitement ou de type de données ?
+</h1>
+<!--/-->
+
+<!--#ExpressionProblem2#-->
+<br><br><br><br>
+<h1>En langage fonctionnel, il est facile d'ajouter de nouveaux traitements (fonctions) mais difficile d'ajouter de nouveaux types de donnée<br><br>
+(modification des if/cond/bloc de match qui déterminent le code du traitement à utiliser pour chaque type)</h1>
+<!--/-->
+
+<!--#ExpressionProblem3#-->
+<br><br><br><br>
+<h1>En langage OO, il est facile d'ajouter de nouveaux types mais difficile d'ajouter des traitements<br><br>
+Le pattern Visiteur n'est qu'une demi-réponse qui nous ramène dans un mode fonctionnel : l'ajout de type nécessite de retoucher les visiteurs</h1>
+<!--/-->
+
+<!--#Protocol1#-->
+<br><br>
+<h1>Le protocole est une sorte d'interface Java</h1>
+<pre class="brush: clojure;">
+(defprotocol MonProtocol
+  "La doc de mon protocole"
+  (bar [a b] "bar docs")
+  (baz [a] [a b] [a b c] "baz docs"))
+</pre>
+<!--/-->
+
+<!--#DataTypes1#-->
+<br>
+<h1>Les "datatypes" sont des structures de données</h1>
+<br>
+<pre class="brush: clojure;">
+(defrecord Point [x y]) ; Le POJO clojure..
+</pre>
+
+<!--/-->
+
+<!--#Protocol2#-->
+<br>
+Le support d'un protocole par un type donné va pouvoir se faire indépendamment de sa déclaration et des autres types supportés
+<br><br>
+<pre class="brush: clojure;">
+(extend-type Point 
+  MonProtocol
+    (bar [a b] a)
+    (baz ([x] x) ([x y & zs] x)))
+</pre>
+<br><br>
+Ces comportements deviennent pluggables à volonté via extend ou extend-protocol (ou à la déclaration du type)<br>
+On peut donc déclarer des ensembles nommés de comportements d'un côté, des types de données de l'autre et les cabler de manière orthgonale
+<!--/-->
+
+<!--#DataTypes2#-->
+<br>
+Les types de données offre par ailleurs un certain nombre de caractéristiques remarquables : 
+<br><br>
+- respectent l'abstraction Associative pour l'interrogation ou l'ajout de champs
+<pre class="brush: clojure;">
+(:x (Point. 2 3))
+;= 2
+(assoc (Point. 3 4) :z 5)
+;= #user.Point{:x 3, :y 4, :z 5}
+</pre>
+<!--/-->
+
+<!--#DataTypes3#-->
+<br>
+sont immutables (more to come..)<br>
+supportent des méta-données (comme tout le reste)<br>
+offre un certain nombre de constructeurs<br>
+sont Reader-ready :
+<pre class="brush: clojure;">
+user=> (pr-str (Point. 2 3))
+;= #user.Point{:x 2, :y 3}"
+user=> (= (read-string *1) (Point. 2 3))
+;= true
+</pre>
+<!--/-->
+
+<!--#MetaData#-->
+
+TODO
+
+<!--/-->
+
+
+
+<!--#Polymorphisme1#-->
+<br><br>
+<h1>"Polymorphisme : utiliser le même code avec différents types"<br>(Wikipedia)</h1>
+On connait en Java, trois formes de polymorphismes intégrés au langage :
+<ul>
+  <li>surcharge d'une méthode (types différents des paramètres)</li>
+  <li>redéfinition de comportements dans une hierarchie de classes</li>
+  <li>classes paramétrées, réalisées pour différents types</li>
+</ul>
+<br>
+=> l'appel des méthodes est homogène et le routage de l'appel se base sur le type de l'objet sous-jacent.
+<!--/-->
+
+<!--#Defmulti1#-->
+<h1>Clojure généralise le principe..<br>.. en explicitant la fonction de répartition</h1>
+<q>A Clojure multimethod is a combination of a dispatching function, and one or more methods</q>
+<br>
+<pre class="brush: clojure;">
+(defmulti calcul
+  (fn [v] (if (<= (count v) 1000)
+    :direct :parallel))) 
+
+(defmethod calcul :direct [v]
+  (Thread/sleep 10) (reduce + v)) ; long !
+(defmethod calcul :parallel [v]
+  (calcul (pmap calcul (partition 1000 v))))
+</pre>
+<!--/-->
+
+<!--#Defmulti2#-->
+<br>
+<h1>.. en permettant la création de hierarchies adhoc</h1>
+<pre class="brush: clojure;">
+(def h (atom (-> (make-hierarchy)
+  (derive java.util.Map ::collection)
+  (derive java.util.Collection ::collection))))
+
+(defmulti foo class 
+  :default :a-what?
+  :hierarchy h)
+
+(defmethod foo ::collection [c] :a-collection)
+(defmethod foo Integer [i] :an-integer)
+(defmethod foo String [s] :a-string)
+</pre>
+<!--/-->
+
+<!--#Defmulti3#-->
+<br>
+<h1>.. en permettant des dispatchs composites</h1>
+<br>
+<pre class="brush: clojure;">
+(defmulti service-charge (fn [acct] [(:account-level acct) (:tag acct)]))
+
+(defmethod service-charge [:acc/Basic :acc/Checking]   [_] 25)
+(defmethod service-charge [:acc/Basic :acc/Savings]    [_] 10)
+(defmethod service-charge [:acc/Premium :acc/Account] [_] 0) 
+</pre>
+<!--/-->
+
+<!--#Defmulti4#-->
+<br>
+<h1>All together : defrecord + defmulti</h1>
+<br>
+<pre class="brush: clojure;">
+(defrecord Rectangle [longueur largeur])
+(defrecord Cercle [rayon])
+
+(defmulti surface type)
+(defmethod surface Rectangle [r]
+    (* (:longueur r) (:largeur r)))
+(defmethod surface Cercle [c]
+    (* (. Math PI) (* (:rayon c) (:rayon c))))
+(defmethod surface :default [x] :oops!)
+
+(surface (Rectangle. 4 13))
+;= 52
+(surface (Cercle. 4))
+;= 50.26548245743669
+(surface nil)
+:oops!
+</pre>
+
+<!--/-->
+
+<!--#Interopérabilité4#-->
+<br>
+<h1>Java depuis clojure</h1>
+<br>
+
+Les maps, set, list, vecteurs, respectent Map, Set, List et Vector<br>
+Les fonctions implements Runnable et Callable
+
+<!--/-->
+
+
+<!--#Interopérabilité5#-->
+<br>
+<h1>Clojure depuis java</h1>
+<br>
+<pre class="brush: clojure;">
+(ns calculateur)
+(defn calcule [args]
+  (apply + args))
+</pre>
+<pre class="brush: clojure;">
+RT.loadResourceScript("calculateur.clj");
+System.out.println(
+  RT.var("calculateur", "calcule")
+  .invoke(new int[] {1, 2, 3}));
+</pre>
+<!--/-->
+
+
+
+
+

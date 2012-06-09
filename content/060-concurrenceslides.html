@@ -1,0 +1,166 @@
+
+<!--#Impur#-->
+pas fonctionnel pur car peu de programme sont "fonctionnels"
+Ce sont plutôt des process, avec des side effects, attendent de evénements extérieurs, repose souvent sur un état (mémoire ou base de données) qui amène la question du "temps", et différentes réponses à des différents moments.
+
+Le challenge est d'arrivé à remodéliser et gérer le temps dans un contexte muti-thread.
+<!--/-->
+
+
+<!--#Variable#-->
+Le modèle traditionnel de la variable était adapté dans un contexte mono-thread ou le "temps" était représenté par le flux d'exécution du code. Avec plusieurs threads, il n'y a plus de sequence d'exécution, plus de maitrise de l'emplacement d'une instruction dans le temps en regard des états que va prendre une variable. 
+=> synchronisation manuelle, locks, AtomicLong
+=> difficile, fragile
+<!--/-->
+
+<!--#Identité#-->
+L'approche concurrentielle de Clojure est caractérisée par le concept d'identité, qui représente une série d'états immuables dans le temps. Comme les états sont des valeurs fixes, un nombre indéfini d'agents peut y accéder en parallèle, et la concurrence se résume alors à gérer les changements d'un état à un autre. Dans cette optique, Clojure propose plusieurs types de références mutables, chacun d'eux ayant une sémantique bien définie pour la transition inter-état.
+<!--/-->
+
+
+<!--#Concept1#-->
+3 concepts :
+
+* Value : 42, une date, une collection.
+Une valeur est immutable
+<!--/-->
+
+<!--#Concept2#-->
+3 concepts :
+
+* Identity : une entité logique l'on associe a une série de valeur (d'état) liés dans le temps.
+Pas un nom ! Une identity peut avoir plusieurs nom. J'appelle ma mère maman, vous l'appelez madame pineau !
+Je suis ici ; je suis là ; pourtant je suis le même. Vous savez que ce n'est pas 2 personnes différentes mais une même personne dont l'état a changé.
+Peut-être composé. La composition du gouvernement a changé il y a peu. l'identité gvt a pris une nouvelle valeur du fait des élections
+Monnaie : le franc, puis l'euro, bientôt le franc ? Juste une valeur de l'identité monnaie.
+<!--/-->
+
+<!--#Concept3#-->
+3 concepts :
+
+* State : "State is a value of an identity at a time"
+Il en découle :
+- ce qui gère le temps doit faire ref à des valeurs
+- le temps est réprésenté par les changements d'état, piloté par un ensemble d'outils 
+<!--/-->
+
+
+<!--#Immutabilité#-->
+Things don't change in place.
+Ne pas oublier la dimension temps : x/y/z et t !
+emplacement memoire et t ! t étant la séquence de fonctions de changements d'état, le futur est fonction du passé mais ne le chnage pas.
+
+=> Tout devrait être immutable : les objets également !
+<!--/-->
+
+<!--#Marche#-->
+exemple de la marche à pied : pas le droit de lever les deux pieds en même temps (course)
+java : ref directe sur des objets mutables (marcheur), lock (stop the world !) pour arriver à voir la position des deux pieds simultanément. Schema à 00:34:30
+clojure : ref indirecte to immutable persistant data struct, prise d'un snapshot (un état) en déréfencant cette ref indirecte. L'état est une value, immutable, j'ai toute la journée si je veux pour discuter si oui ou non les deux pieds sont en l'air : schema 00:35:30
+<!--/-->
+
+<!--#Concretement1#-->
+4 types de références (choses mutables) en clojure :
+- refs : shared/synchrnous/coordinated
+- agents : shared/asynchrnous/autonomous
+- atoms : shared/synchronous/autonomous
+- vars : isolated chnages within threads
+<!--/-->
+
+<!--#Concretement2#-->
+uniform state transition model :
+('change-state' ref function [args*])
+la fonction recoit en plus des args le current state et retourne le state suivant
+snapshot of current state tojours dispo avec deref
+pas de user locks, pas de deadlocks
+schema update à 00:42:30
+<!--/-->
+
+<!--#Refs#-->
+STM : transactions en mémoire : ACI et optimiste (retry si conflit d'où la necessité de ne pas avoir d'effets de bord dansles fucntipn d'upadte)
+refs sont changé à l'intérier d'une tarnsctauon
+trans sont speculative
+(dosync ..)
+exemple : 
+user=> (def foo (ref {:me "jane", :you "?"}))
+#'user/foo
+user=> @foo
+{:me "jane", :you "?"}
+user=> (assoc @foo :you "tar-zan")
+{:me "jane", :you "tar-zan"}
+user=> @foo
+{:me "jane", :you "?"}
+user=> (commute foo assoc :you "tar-zan")
+IllegalStateException No transaction running  clojure.lang.LockingTransaction.getEx (LockingTransaction.java:208)
+user=> (dosync (commute foo assoc :you "tar-zan"))
+{:me "jane", :you "tar-zan"}
+user=> @foo
+{:me "jane", :you "tar-zan"}
+<!--/-->
+
+<!--#Agents#-->
+Agents : les actions envoyés sont mis en queue seralisée
+user=> (def foo (agent {:me "jane", :you "?"}))
+#'user/foo
+user=> @foo
+{:me "jane", :you "?"}
+user=> (send foo assoc :you "tar-zan")
+#<Agent@20d9896e: {:me "jane", :you "tar-zan"}>
+user=> @foo
+{:me "jane", :you "?"}
+... plus tard ...
+user=> @foo
+{:me "jane", :you "tar-zan"}
+<!--/-->
+
+<!--#Atoms#-->
+Atoms : swap! modification atomique, la fonction peut être appelée plusieurs fois
+<!--/-->
+
+<!--#Vars#-->
+Vars : définie par thread : accès de-facto non concurrent
+<!--/-->
+
+
+<!--#Résumé#-->
+En Résumé :
+valeurs immutables une notion typiquement fonctionnelle s'avère aussi critique pour la gestion de la concurrence
+des structures de données persistentes pour avoir des valeurs composites immutables
+sur cette immutabilité clojure propose un assortiment de méchanismes de synchronisation des accès en écriture
+var in java : identity + state + time
+var in clojure : suite de valeur dans le temps, valeur immutableunified update model : (change-state ref fn [args*])
+L'accès en lecture n'est jamais bloqué
+no user locking, no deadlock
+<!--/-->
+
+
+
+==
+
+parallelism (pvalues, pmap, pcalls)
+delays, futurs et promises : http://my.safaribooksonline.com/book/programming/clojure/9781449310387/4dot-concurrency-and-parallelism/id2514027
+dynamic binding
+
+
+
+
+
+
+méta-données p135
+
+
+ 
+
+https://github.com/clojure
+
+
+
+
+
+
+
+
+
+
+
+
