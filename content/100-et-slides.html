@@ -1,0 +1,80 @@
+
+<!--#More1#-->
+<h1>Mais encore ?<br><br><big>Clojure n'est pas un langage pour la JVM !</big></h1>
+C'est un langage "hébergé" : JVM, CLR, Javascript, Python, ...
+<br><br><br>
+(ThoughtWorks Technology Radar de mars 2012)<br><br>
+<q>
+"ClojureScript illustrates just how cross-platform the
+core of Clojure really is: they ported the primary parts
+to run on JavaScript."
+</q>
+<br>
+<q>
+"One interesting option afforded by ClojureScript is the ability
+to send data structures à la JSON using ClojureScript as
+the data structure. Because Clojure is a Lisp, this means
+that you can also send “real” code."
+</q>
+<!--/-->
+
+<!--#More2#-->
+<h1>Mais encore ?<br><br><big>Clojure n'est pas un langage dynamique !</big></h1>
+Bon si.. mais
+<pre class="brush: clojure;">
+(defn len [x] (.length x))
+(defn len2 [^String x] (.length x))
+ 
+(time (reduce + (map len (repeat 1000000 "asdf"))))
+; "Elapsed time: 3007.198 msecs"
+(time (reduce + (map len2 (repeat 1000000 "asdf"))))
+; "Elapsed time: 308.045 msecs"
+</pre>
+et demain (GSOC2012) : <b>Clojure with a type system, as a library.</b><br>
+(https://github.com/frenchy64/typed-clojure)
+<!--/-->
+
+
+
+
+
+ 
+
+Kingdom of nouns
+comm entre applis : on utilise de la data pure, pas des "encapsulations".
+Pourquoi ne le faisons nous pas à l'intérieur de nos programmes ?
+pourquoi utiliser une classe qui a des méthodes information-specific, lie la logique externe à cette implémentation au lieu d'utiliser des traitements génériques, et empeche du coup la composition.
+
+
+sans état : easier to read/test/maintain
+
+
+Data structure immutable : créé de nouvelles version sur chaque modif
+mais le fait avec le même ordre de performance
+(repose sur le partage desous-structure possible puisque immutable)
+
+
+exemple de macro : doto
+exemples :
+control flow : when, when-not and org
+vars : defn defmacro defmulti
+java interop : .. doto deftype proxy
+rearranging : -> ->> -?>
+scopes : dosync time with-open
+"special form" fn lazy-seq let
+
+
+
+
+
+méta-données p135
+destructuring
+memoization
+
+
+
+
+
+
+
+
