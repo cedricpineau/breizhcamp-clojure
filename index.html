@@ -51,31 +51,28 @@
             </div>
         </div>
 
-        <div id="Accroche" class="step slide" data-x="160" data-y="-100">
+        <div id="Moi" class="step slide" data-x="160" data-y="-100">
+            
+            <div class="centered">
+            
             <br>
-            <div class="centered">
-                <img src="img/breizhcamp.png">
+            <br>
+            Cédric Pineau<br>
+            <br>
+            Le libre / Debian<br>
+            JVM<br>
+            <br>
+            <img src="img/followMe.png" width="8%"> cedricpineau<br>
+            <br><br><br><br><br>
+                <img src="img/anteo.jpg">
             </div>
+            
+        </div>
+
+        <div id="What" class="step slide" data-x="240" data-y="-100">
             <br><br>
-            <div class="centered">
-                Les fondements, innovants ou antédiluviens, qui font de<br> 
-                <big><strong>Clojure</strong></big><br>
-                un outil unique sur la JVM !<br>
-                Les grandes idées et les petites attentions du langage.
-            </div>
-        </div>
-
-        <div id="Bonjour" class="step slide" data-x="240" data-y="-100">
-            <br><br><br><br><br><br>
-            <div class="centered">
-                <pre class="brush: clojure;">
-                    (println "Bonjour et bienvenus BreizhCampeurs !")
-                </pre>
-            </div>
-        </div>
-
-        <div id="What" class="step slide" data-x="320" data-y="-100">
-            <br><br><br>Clo-what ?<br><br><br>
+            <h1>Clo-<b>what ?</b></h1>
+            <br><br>
             <ul>
                 <li>Un LISP</li>
                 <li>Sur la JVM !</li>
@@ -84,16 +81,18 @@
             </ul>
         </div>
 
-        <div id="Rich" class="step slide" data-x="400" data-y="-100">
+        <div id="Rich" class="step slide" data-x="320" data-y="-100">
             <br><br>
+            <h1>KISS ?</b></h1>
+            <br>
             <img src="img/richHickey.jpg">
             <br>
             <br>
-            <q>"Reducing incidental complexity is a primary focus of Clojure"</q>
+            <div class="centered"><q>"Reducing incidental complexity is a primary focus of Clojure"</q></div>
         </div>
 
-        <div id="Opensource" class="step slide" data-x="480" data-y="-100">
-            <br><br>
+        <div id="Opensource" class="step slide" data-x="400" data-y="-100">
+            <br><br><br>
             Un développement ouvert, sous licence Eclipse Public License<br>
             <br>
             70 développeurs sur la release 1.4<br>
@@ -105,21 +104,22 @@
             </ul>
         </div>
 
-        <div id="Promu1" class="step slide" data-x="560" data-y="-100">
+        <div id="Promu1" class="step slide" data-x="480" data-y="-100">
             <br><br><br>
             <div class="centered">
                 <img src="img/uncleBob.png">
             </div>
         </div>
 
-        <div id="Promu2" class="step slide" data-x="640" data-y="-100">
+        <div id="Promu2" class="step slide" data-x="560" data-y="-100">
             <div class="centered">
                 ThoughtWorks Technology Radar de mars 2012
+                <br><br>
                 <img src="img/thoughtworks.png">
             </div>
         </div>
 
-        <div id="lisp1" class="step slide" data-x="720" data-y="-100">
+        <div id="lisp1" class="step slide" data-x="640" data-y="-100">
             <br><br>
             <h1>"Practical LISP on the JVM"</h1>
             <br>
@@ -131,7 +131,7 @@
             </ul>
         </div>
 
-        <div id="Syntaxe1" class="step slide" data-x="800" data-y="-100">
+        <div id="Syntaxe1" class="step slide" data-x="720" data-y="-100">
             <br><br>
             <h1>Lots of Irritating Superfluous Parenthesis !<br>(mais moins que LISP !)</h1>
             <br>
@@ -142,13 +142,13 @@
             </ul>
         </div>
 
-        <div id="Syntaxe2" class="step slide" data-x="880" data-y="-100">
+        <div id="Syntaxe2" class="step slide" data-x="800" data-y="-100">
             <br><br>
             <h1>Pourquoi une notation préfixée ?</h1>
             <ul>
                 <li>Une syntaxe régulière, les opérateurs sont des fonctions</li>
                 <li>Un nombre d'arguments variables : (+ 1 2 3)</li>
-                <li>Pas de casse-tête de priorité d'opérateur !</li>
+                <li>Pas de casse-tête de priorité d'opérateurs !</li>
             </ul>
             <br>
             <pre class="brush: clojure;">
@@ -157,38 +157,48 @@
             </pre>
         </div>
 
-        <div id="S-expression1" class="step slide" data-x="960" data-y="-100">
+        <div id="S-expression1" class="step slide" data-x="880" data-y="-100">
             <br>
             A l'inverse de nombreux langages, il n'existe pas de "Statement"<br>
-            Tout est expression dont l'évaluation donne une valeur unique, même les constructions de type if, for, etc<br><br>
-            Exemples :<br>
+            Tout est expression dont l'évaluation donne une valeur unique, même les constructions de type if, for, etc<br>
             <pre class="brush: clojure;">
             1
             ;= 1
+            
             [1 2 3] ; Vecteur
             ;= [1 2 3]
+            
             (println "Bonjour et bienvenus BreizhCampeurs !")
             ; Bonjour et bienvenus BreizhCampeurs !
             ;= nil
+            
             (+ 1 2)  ; Appel de fonction
             ;= 3
             </pre>
         </div>
 
-        <div id="S-expression2" class="step slide" data-x="1040" data-y="-100">
-            <br><br>
+        <div id="S-expression2" class="step slide" data-x="960" data-y="-100">
+            <br>
             La structure régulière facilite l'apprentissage du langage<br>
             <br>
             <pre class="brush: clojure;">
             (def a 1) ; int a = 1;
             ;= #'user/a 
+            
             (inc a) ; a++; ou ++a; ou a+=1; ou a+1;
             ;= 2
+            
             (if (odd? a) (/ a 2) a) ; a%2 != 0 ? a / 2 : a;
+            ;= 1/2
+            
+            (defn square [x]
+              "Met au carré"
+              (* x x))
+            ;= #'user/square
             </pre>
         </div>
 
-        <div id="homoiconicité" class="step slide" data-x="1120" data-y="-100">
+        <div id="homoiconicité" class="step slide" data-x="1040" data-y="-100">
             <br><br>
             <h1>Homoiconicité<br>"Lisp programs are lisp data structures"</h1>
             <br>
@@ -199,7 +209,7 @@
             </ul>
         </div>
 
-        <div id="Macro1" class="step slide" data-x="1200" data-y="-100">
+        <div id="Macro1" class="step slide" data-x="1120" data-y="-100">
             <br><br>
             <h1>Exemple de la construction "with-open"</h1>
             <pre class="brush: clojure;">
@@ -212,7 +222,7 @@
             </pre>
         </div>
 
-        <div id="Macro2" class="step slide" data-x="1280" data-y="-100">
+        <div id="Macro2" class="step slide" data-x="1200" data-y="-100">
             <pre class="brush: clojure;">
             (defmacro with-open
               [bindings & body]
@@ -233,7 +243,7 @@
             </pre>
         </div>
 
-        <div id="DSL1" class="step slide" data-x="1360" data-y="-100">
+        <div id="DSL1" class="step slide" data-x="1280" data-y="-100">
             <div class="centered">DSL : Enlive (HTML templating)</div>
             <br>
             <pre class="brush: clojure;">
@@ -254,7 +264,7 @@
             </pre>
         </div>
 
-        <div id="DSL2" class="step slide" data-x="1440" data-y="-100">
+        <div id="DSL2" class="step slide" data-x="1360" data-y="-100">
             <br><br>
             <h1>DSL : ClojureQL (SQL)</h1>
             <br>
@@ -268,16 +278,34 @@
             </pre>
         </div>
 
+        <div id="Lisp2" class="step slide" data-x="1440" data-y="-100">
+            <br><br>
+            <h1>"Practical LISP on the JVM"</h1>
+            <br>
+            <q>
+            "Lisp is a programmable programming language."<br>
+            John Foderaro, CACM, September 1991<br>
+            <br>
+            "Lisp isn't a language, it's a building material."<br>
+            Alan Kay
+            </q>
+            
+        </div>
+
         <div id="REPL1" class="step slide" data-x="1520" data-y="-100">
             <div class="centered">La Read–Eval–Print Loop<br>Un outil de développement interactif</div>
-            <!--<iframe src="http://tryclj.com/" width="100%" height="700">
+            <!--
+            <iframe src="http://tryclj.com/" width="100%" height="700">
               <p>Your browser does not support iframes.</p>
             </iframe>
             -->
         </div>
 
         <div id="REPL2" class="step slide" data-x="1600" data-y="-100">
-            La modularité clojure repose sur l'utilisation d'espace de nommage
+            <br><br>
+            <h1>user=> ??</h1>
+            La modularité clojure repose sur l'utilisation d'espaces de nommage
+            <br>
             <pre class="brush: clojure;">
             (ns ^{:doc "The core Clojure language."
                    :author "Rich Hickey"}
@@ -380,21 +408,31 @@
         </div>
 
         <div id="dataStructure1" class="step slide" data-x="2080" data-y="-100">
-            Clojure offre un ensemble de structure de données
+            <br>
+            et un ensemble de structures de données :
             <pre class="brush: clojure;">
-            (get [1 2 3 4] 2) ; Vecteur, indexé 
+            ; Le vecteur, indexé 
+            (get [1 2 3 4] 2)
             ;= 3
-            ({:name "Clojure", :auteur "Rich Hickey"} :name) ; Map
+            
+            ; Map
+            ({:name "Clojure", :auteur "Rich Hickey"} :name)
             ;= "Clojure"
-            (#{ \e \i \o \u} ) ; Set
+            
+            ; Set
+            (#{ \e \i \o \u} )
             ;= 
-            (second '( \e \i \o \u)) ; Une liste (chainée simple)
+            
+            ; Une liste (chainée simple)
+            (second '( \e \i \o \u))
             ;= \e
             </pre>
         </div>
 
         <div id="dataStructure2" class="step slide" data-x="2160" data-y="-100">
+            <br><br>
             Ces structures sont manipulées au travers de 7 abstractions :
+            <br><br>
             <ul>
                 <li>Collection</li>
                 <li>Sequence</li> 
@@ -407,41 +445,59 @@
         </div>
 
         <div id="Collection1" class="step slide" data-x="2240" data-y="-100">
+            <h1>Collection</h1>
             Toutes les structures de données clojure sont des collections
             <pre class="brush: clojure;">
             (def c (conj [] 1 2 3))
             ;= #'user/c
             c
             ;= [1 2 3]
+            
             (count c)
             ;= 3
+            
             (conj '(1 2) 3)
             ;= (3 1 2)
+            
             (conj [1 2] 3)
             ;= [1 2 3]
-            
             </pre>
         </div>
 
         <div id="Sequence1" class="step slide" data-x="2320" data-y="-100">
-            <h1>La sequence est une abstraction essentielle du langage</h1>
-            Toutes les collections clojure, celle de Java, les maps Java, CharSequence (dont String), les Iterable, les Arrays et même nil sont des séquences.<br>
+            <br>
+            <h1>Sequence, une abstraction essentielle du langage</h1>
+            <br>
+            Toutes les Collections clojure et Java, les maps Java, les CharSequence (dont String), les Iterable, les Arrays et même nil sont des séquences.<br>
+            <br>
             Concrètement un répertoire et un fichier sont des séquences, les enregistrements d'une table de BD forment une séquence, ..<br>
-            cons, first, second, rest, next ; seq, lazy-seq 
+            <br>
+            L'intérêt principal des sequences est l'<b>évaluation paresseuse</b>, et les <b>séquences infinies</b>
+        </div>
+
+        <div id="Sequence2" class="step slide" data-x="2400" data-y="-100">
+            <br>
             <pre class="brush: clojure;">
             (cons 3 '(1 2)) ou (cons 3 [1 2])
             ;= (3 1 2)
+            
+            ; first, second, rest, last, butlast
+            
             (defn random-ints [limit]
               (lazy-seq
                 (cons (rand-int limit)
                       (random-ints limit))))
             ;= #'user/random-ints
+            
             (take 10 (random-ints 50))
             ;= (49 5 2 30 35 27 16 17 6 16)
             </pre>
+            <br>
+            http://clojure.org/Sequences
         </div>
 
-        <div id="Associative1" class="step slide" data-x="2400" data-y="-100">
+        <div id="Associative1" class="step slide" data-x="2480" data-y="-100">
+            <h1>Associative</h1>
             <pre class="brush: clojure;">
             (def m (assoc {} :fname "Rich" :lname "Hickey"))
             ;= #'user/m
@@ -459,14 +515,18 @@
             </pre>
         </div>
 
-        <div id="Indexed1" class="step slide" data-x="2480" data-y="-100">
+        <div id="Indexed1" class="step slide" data-x="2560" data-y="-100">
+            <h1>Indexed</h1>
             <pre class="brush: clojure;">
             (def v [:a :b :c])
             ;= #'user/v
-            (nth v 2)
+            
+            (nth v 2) ; ou (v 2) car v est "Associative" !
             ;= :c
-            (nth v 3) ; possibilité de valeur par défaut
+            (nth v 3)
             ;= IndexOutOfBoundsException ..
+            (nth v 3 0) ; possibilité de valeur par défaut
+            ;= 0
             (get v 3)
             ;= nil
             (get :?? 3)
@@ -474,43 +534,50 @@
             </pre>
         </div>
 
-        <div id="Stack" class="step slide" data-x="2560" data-y="-100">
+        <div id="Stack" class="step slide" data-x="2640" data-y="-100">
+            <h1>Stack</h1>
             <pre class="brush: clojure;">
             (def s (conj '() 1 2 3))
             ;= #'user/s
             s
             ;= (3 2 1)
+            
             (peek s)
             ;= 3
+            
             (pop s)
             ;= (2 1)
             </pre>
         </div>
 
-        <div id="Set" class="step slide" data-x="2640" data-y="-100">
+        <div id="Set" class="step slide" data-x="2720" data-y="-100">
+            <h1>Set</h1>
             <pre class="brush: clojure;">
             (disj #{1 2 3} 3 1)
             ;= #{2}
             </pre>
+            <br>
             clojure.set : union, intersection, projection, etc
         </div>
 
-        <div id="Sorted" class="step slide" data-x="2720" data-y="-100">
-            Applicable sur les sorted-map et sorted-set
+        <div id="Sorted" class="step slide" data-x="2800" data-y="-100">
+            <h1>Sorted</h1>
             <pre class="brush: clojure;">
             (def sm (sorted-map 
               :lname "Hickey" :fname "Rich" :age :??))
             ;= #'user/sm
             sm
-            ;= {:age :inconnu, :fname "Rich", :lname "Hickey"}
+            ;= {:age :??, :fname "Rich", :lname "Hickey"}
+            
             (rseq sm)
             ; ([:lname "Hickey"] [:fname "Rich"] [:age :??])
+            
             (subseq sm > :b < :l)
             ;= ([:fname "Rich"])
             </pre>
         </div>
 
-        <div id="fonctionnel1" class="step slide" data-x="2800" data-y="-100">
+        <div id="fonctionnel1" class="step slide" data-x="2880" data-y="-100">
             <br><br>
             <h1>Clojure encourage la programmation fonctionnelle</h1>
             <br>
@@ -528,7 +595,7 @@
             </ul>
         </div>
 
-        <div id="Map1" class="step slide" data-x="2880" data-y="-100">
+        <div id="Map1" class="step slide" data-x="2960" data-y="-100">
             <h1>Map<br><br><br><img src="img/map.png" width="50%"></h1>
             <pre class="brush: clojure;">
             (map #(+ 10 %1) [ 1 3 5 7 ])
@@ -538,7 +605,7 @@
             (http://techbehindtech.com/)
         </div>
 
-        <div id="Reduce1" class="step slide" data-x="2960" data-y="-100">
+        <div id="Reduce1" class="step slide" data-x="3040" data-y="-100">
             <h1>Reduce<br><br><br><img src="img/reduce.png" width="50%"></h1>
             <pre class="brush: clojure;">
             (reduce * [2 3 4])
@@ -546,7 +613,7 @@
             </pre>
         </div>
 
-        <div id="Filter1" class="step slide" data-x="3040" data-y="-100">
+        <div id="Filter1" class="step slide" data-x="3120" data-y="-100">
             <h1>Filter<br><br><br><img src="img/filter.png" width="50%"></h1>
             <pre class="brush: clojure;">
             (filter even? [1 2 3 4 5 6])
@@ -554,7 +621,7 @@
             </pre>
         </div>
 
-        <div id="Iterate1" class="step slide" data-x="3120" data-y="-100">
+        <div id="Iterate1" class="step slide" data-x="3200" data-y="-100">
             <h1>Iterate</h1>
             <br><br>
             <q>Returns a lazy sequence of x, (f x), (f (f x)) etc.<br>
@@ -566,7 +633,7 @@
             </pre>
         </div>
 
-        <div id="Exemple1" class="step slide" data-x="3200" data-y="-100">
+        <div id="Exemple1" class="step slide" data-x="3280" data-y="-100">
             
             <pre class="brush: clojure;">
             
@@ -590,7 +657,7 @@
             </pre>
         </div>
 
-        <div id="Exemple2" class="step slide" data-x="3280" data-y="-100">
+        <div id="Exemple2" class="step slide" data-x="3360" data-y="-100">
             <pre class="brush: clojure;">
             (defn indexed [coll]
               (map vector (iterate inc 0) coll))
@@ -611,7 +678,7 @@
             (Stuart Halloway)
         </div>
 
-        <div id="Exemple3" class="step slide" data-x="3360" data-y="-100">
+        <div id="Exemple3" class="step slide" data-x="3440" data-y="-100">
             <br>
             <pre class="brush: clojure;">
             (index-filter #{ \e \i \o \u} "Br  zhC mp urs")
@@ -631,7 +698,7 @@
             
         </div>
 
-        <div id="Syntaxe3" class="step slide" data-x="3440" data-y="-100">
+        <div id="Syntaxe3" class="step slide" data-x="3520" data-y="-100">
             <br><br>
             <h1>Lisibilité<br>effort total = effort par line x nombre de lignes</h1>
             <br>
@@ -642,7 +709,8 @@
             </ul>
         </div>
 
-        <div id="fonctionnel4" class="step slide" data-x="3520" data-y="-100">
+        <div id="fonctionnel4" class="step slide" data-x="3600" data-y="-100">
+            
             
             recursive iteration instead of side-effect based looping
             Clojure is impure, in that it doesn't force your program to be referentially transparent, and doesn't strive for 'provable' programs. The philosophy behind Clojure is that most parts of most programs should be functional, and that programs that are more functional are more robust.
@@ -655,7 +723,7 @@
             
         </div>
 
-        <div id="fonctionnel5" class="step slide" data-x="3600" data-y="-100">
+        <div id="fonctionnel5" class="step slide" data-x="3680" data-y="-100">
             <h1>List comprehension</h1>
             
             <pre class="brush: clojure;">
@@ -665,25 +733,7 @@
             
         </div>
 
-        <div id="fonctionnel6" class="step slide" data-x="3680" data-y="-100">
-            <h1>Laziness</h1>
-            
-            <pre class="brush: clojure;">
-            
-            </pre>
-            
-        </div>
-
-        <div id="lisp4" class="step slide" data-x="3760" data-y="-100">
-            <pre class="brush: clojure;">
-            (defn square [x]
-            "Met au carré"
-              (* x x))
-            (square 3)
-            </pre>
-        </div>
-
-        <div id="JVM" class="step slide" data-x="3840" data-y="-100">
+        <div id="JVM" class="step slide" data-x="3760" data-y="-100">
             <br><br>
             <h1>Un langage sur la JVM</h1>
             <br>
@@ -694,7 +744,7 @@
             </ul>
         </div>
 
-        <div id="Symbiotique" class="step slide" data-x="3920" data-y="-100">
+        <div id="Symbiotique" class="step slide" data-x="3840" data-y="-100">
             <br><br>
             <h1>Construit avec et sur l'écosystème</h1>
             <br>
@@ -707,7 +757,7 @@
             On ne réécrit pas les drivers JDBC ou les serveurs Web !
         </div>
 
-        <div id="Interopérable" class="step slide" data-x="4000" data-y="-100">
+        <div id="Interopérable" class="step slide" data-x="3920" data-y="-100">
             <br><br>
             <h1>Interopérable avec Java</h1>
             
@@ -716,7 +766,7 @@
             
             (.nextInt rnd) ; appel de méthode
             
-            static Math/PI ; variable statique
+            (println Math/PI) ; variable statique
             
             (javax.swing.JOptionPane/showMessageDialog 
               nil "Bonjour BreizhCampeurs !")
@@ -725,8 +775,7 @@
             </pre>
         </div>
 
-        <div id="Interopérable2" class="step slide" data-x="4080" data-y="-100">
-            <br>
+        <div id="Interopérable2" class="step slide" data-x="4000" data-y="-100">
             <h1>Et pour aller (un peu) plus loin</h1>
             <pre class="brush: clojure;">
             (.. person getAdress getZipCode)
@@ -741,9 +790,11 @@
             ; Bonjour BreizhCampeurs !
             ;= nil
             </pre>
+            Les map, set, list et vector, respectent les Map, Set, List et Vector Java :-)<br>
+            Les fonctions implementent Runnable et Callable
         </div>
 
-        <div id="Interopérable3" class="step slide" data-x="4160" data-y="-100">
+        <div id="Interopérable3" class="step slide" data-x="4080" data-y="-100">
             <pre class="brush: clojure;">
             (import '(javax.swing JFrame JPanel JButton 
               JOptionPane) 'java.awt.event.ActionListener)
@@ -765,55 +816,68 @@
             </pre>
         </div>
 
-        <div id="Abstractions" class="step slide" data-x="4240" data-y="-100">
+        <div id="Interopérabilité5" class="step slide" data-x="4160" data-y="-100">
             <br>
-            <h1>les abstractions de constructions du langage</h1>
+            <h1>Interopérabilité : Clojure depuis java</h1>
+            <pre class="brush: clojure;">
+            (ns calculateur)
+            (defn calcule [args]
+              (apply + args))
+            </pre>
+            <pre class="brush: clojure;">
+            RT.loadResourceScript("calculateur.clj");
+            Object resultat = RT
+                .var("calculateur", "calcule")
+                .invoke(new int[] {1, 2, 3});
+            
+            System.out.println(resultat);
+            </pre>
+        </div>
+
+        <div id="ExpressionProblem" class="step slide" data-x="4240" data-y="-100">
+            <br>
+            <h1>#1 : Expression Problem<br><br>Comment faciliter l'évolution des programmes<br> par l'ajout de traitement ou de type de données ?</h1>
+        </div>
+
+        <div id="ExpressionProblem2" class="step slide" data-x="4320" data-y="-100">
+            <br><br><br><br>
+            <h1>En langage fonctionnel, il est facile d'ajouter de nouveaux traitements (fonctions) mais difficile d'ajouter de nouveaux types de données<br><br>
+            (modification des if/cond/bloc de match qui déterminent le code du traitement à utiliser pour chaque type)</h1>
+        </div>
+
+        <div id="ExpressionProblem3" class="step slide" data-x="4400" data-y="-100">
+            <br><br><br><br>
+            <h1>En langage OO, il est facile d'ajouter de nouveaux types mais difficile d'ajouter des traitements<br><br>
+            Le pattern Visiteur n'est qu'une demi-réponse qui nous ramène dans un mode fonctionnel : l'ajout de type nécessite de retoucher les visiteurs</h1>
+        </div>
+
+        <div id="Abstractions1" class="step slide" data-x="4480" data-y="-100">
+            <h1>Les abstractions de constructions</h1>
             <br>
             Les protocols et les datatypes ont été introduits avec Clojure 1.2 de manière à ce que le langage dispose de ses propres abstractions pour définir ses librairies
             <br><br>
             Avant cela les Sequence, Collection, etc étaient définis en terme d'interface Java et leurs implémentations sous la forme de classe, ce qui rendait le langage dépendant de la plateforme sous-jacente
         </div>
 
-        <div id="ExpressionProblem1" class="step slide" data-x="4320" data-y="-100">
-            <br><br><br><br>
-            <h1>Le second objectif était d'apporter une réponse à l'"Expression Problem"<br><br> Comment faciliter l'évolution des programmes<br> par l'ajout de traitement ou de type de données ?
-            </h1>
-        </div>
-
-        <div id="ExpressionProblem2" class="step slide" data-x="4400" data-y="-100">
-            <br><br><br><br>
-            <h1>En langage fonctionnel, il est facile d'ajouter de nouveaux traitements (fonctions) mais difficile d'ajouter de nouveaux types de donnée<br><br>
-            (modification des if/cond/bloc de match qui déterminent le code du traitement à utiliser pour chaque type)</h1>
-        </div>
-
-        <div id="ExpressionProblem3" class="step slide" data-x="4480" data-y="-100">
-            <br><br><br><br>
-            <h1>En langage OO, il est facile d'ajouter de nouveaux types mais difficile d'ajouter des traitements<br><br>
-            Le pattern Visiteur n'est qu'une demi-réponse qui nous ramène dans un mode fonctionnel : l'ajout de type nécessite de retoucher les visiteurs</h1>
-        </div>
-
         <div id="Protocol1" class="step slide" data-x="4560" data-y="-100">
             <br><br>
-            <h1>Le protocole est une sorte d'interface Java</h1>
+            <ul><li>Le protocole, une sorte d'interface Java</li>
             <pre class="brush: clojure;">
             (defprotocol MonProtocol
               "La doc de mon protocole"
               (bar [a b] "bar docs")
               (baz [a] [a b] [a b c] "baz docs"))
             </pre>
-        </div>
-
-        <div id="DataTypes1" class="step slide" data-x="4640" data-y="-100">
             <br>
-            <h1>Les "datatypes" sont des structures de données</h1>
-            <br>
+            <li>Les "datatypes", des structures de pure donnée</li>
             <pre class="brush: clojure;">
             (defrecord Point [x y]) ; Le POJO clojure..
             </pre>
+            </ul>
             
         </div>
 
-        <div id="Protocol2" class="step slide" data-x="4720" data-y="-100">
+        <div id="Protocol2" class="step slide" data-x="4640" data-y="-100">
             <br>
             Le support d'un protocole par un type donné va pouvoir se faire indépendamment de sa déclaration et des autres types supportés
             <br><br>
@@ -823,12 +887,12 @@
                 (bar [a b] a)
                 (baz ([x] x) ([x y & zs] x)))
             </pre>
-            <br><br>
-            Ces comportements deviennent pluggables à volonté via extend ou extend-protocol (ou à la déclaration du type)<br>
-            On peut donc déclarer des ensembles nommés de comportements d'un côté, des types de données de l'autre et les cabler de manière orthgonale
+            <br>
+            Ces comportements deviennent pluggables à volonté via extend ou extend-protocol (ou à la déclaration du type)<br><br>
+            On peut donc déclarer des ensembles nommés de comportements d'un côté, des types de données de l'autre et les cabler de manière orthogonale
         </div>
 
-        <div id="DataTypes2" class="step slide" data-x="4800" data-y="-100">
+        <div id="DataTypes2" class="step slide" data-x="4720" data-y="-100">
             <br>
             Les types de données offre par ailleurs un certain nombre de caractéristiques remarquables : 
             <br><br>
@@ -836,34 +900,30 @@
             <pre class="brush: clojure;">
             (:x (Point. 2 3))
             ;= 2
+            
             (assoc (Point. 3 4) :z 5)
             ;= #user.Point{:x 3, :y 4, :z 5}
             </pre>
         </div>
 
-        <div id="DataTypes3" class="step slide" data-x="4880" data-y="-100">
-            <br>
-            sont immutables (more to come..)<br>
-            supportent des méta-données (comme tout le reste)<br>
-            offre un certain nombre de constructeurs<br>
-            sont Reader-ready :
+        <div id="DataTypes3" class="step slide" data-x="4800" data-y="-100">
+            <br><br>
+            - sont immutables (more to come..)<br>
+            - supportent des méta-données (comme tout le reste..)<br>
+            - offre un certain nombre de constructeurs<br>
+            - sont Reader-ready :
             <pre class="brush: clojure;">
             user=> (pr-str (Point. 2 3))
             ;= #user.Point{:x 2, :y 3}"
+            
             user=> (= (read-string *1) (Point. 2 3))
             ;= true
             </pre>
         </div>
 
-        <div id="MetaData" class="step slide" data-x="4960" data-y="-100">
-            
-            TODO
-            
-        </div>
-
-        <div id="Polymorphisme1" class="step slide" data-x="5040" data-y="-100">
-            <br><br>
-            <h1>"Polymorphisme : utiliser le même code avec différents types"<br>(Wikipedia)</h1>
+        <div id="Polymorphisme1" class="step slide" data-x="4880" data-y="-100">
+            <br>
+            <h1>#2 Polymorphisme<br><br>"Utiliser le même code avec différents types" (Wikipedia)</h1>
             On connait en Java, trois formes de polymorphismes intégrés au langage :
             <ul>
               <li>surcharge d'une méthode (types différents des paramètres)</li>
@@ -874,9 +934,9 @@
             => l'appel des méthodes est homogène et le routage de l'appel se base sur le type de l'objet sous-jacent.
         </div>
 
-        <div id="Defmulti1" class="step slide" data-x="5120" data-y="-100">
+        <div id="Defmulti1" class="step slide" data-x="4960" data-y="-100">
             <h1>Clojure généralise le principe..<br>.. en explicitant la fonction de répartition</h1>
-            <q>A Clojure multimethod is a combination of a dispatching function, and one or more methods</q>
+            Multi-méthode = f° de répartition + n [valeur, f° de traitement]
             <br>
             <pre class="brush: clojure;">
             (defmulti calcul
@@ -890,7 +950,7 @@
             </pre>
         </div>
 
-        <div id="Defmulti2" class="step slide" data-x="5200" data-y="-100">
+        <div id="Defmulti2" class="step slide" data-x="5040" data-y="-100">
             <br>
             <h1>.. en permettant la création de hierarchies adhoc</h1>
             <pre class="brush: clojure;">
@@ -908,23 +968,25 @@
             </pre>
         </div>
 
-        <div id="Defmulti3" class="step slide" data-x="5280" data-y="-100">
+        <div id="Defmulti3" class="step slide" data-x="5120" data-y="-100">
             <br>
             <h1>.. en permettant des dispatchs composites</h1>
             <br>
             <pre class="brush: clojure;">
-            (defmulti service-charge (fn [acct] [(:account-level acct) (:tag acct)]))
+            (defmulti service-charge
+              (fn [acct] [(:account-level acct) (:tag acct)]))
             
-            (defmethod service-charge [:acc/Basic :acc/Checking]   [_] 25)
-            (defmethod service-charge [:acc/Basic :acc/Savings]    [_] 10)
-            (defmethod service-charge [:acc/Premium :acc/Account] [_] 0) 
+            (defmethod service-charge
+              [:acc/Basic :acc/Checking]   [_] 25)
+            (defmethod service-charge
+              [:acc/Basic :acc/Savings]    [_] 10)
+            (defmethod service-charge
+              [:acc/Premium :acc/Account] [_] 0) 
             </pre>
         </div>
 
-        <div id="Defmulti4" class="step slide" data-x="5360" data-y="-100">
-            <br>
-            <h1>All together : defrecord + defmulti</h1>
-            <br>
+        <div id="Defmulti4" class="step slide" data-x="5200" data-y="-100">
+            <div class="centered">All together : defrecord + defmulti</div>
             <pre class="brush: clojure;">
             (defrecord Rectangle [longueur largeur])
             (defrecord Cercle [rayon])
@@ -946,36 +1008,9 @@
             
         </div>
 
-        <div id="Interopérabilité4" class="step slide" data-x="5440" data-y="-100">
+        <div id="Impur" class="step slide" data-x="5280" data-y="-100">
             <br>
-            <h1>Java depuis clojure</h1>
-            <br>
-            
-            Les maps, set, list, vecteurs, respectent Map, Set, List et Vector<br>
-            Les fonctions implements Runnable et Callable
-            
-        </div>
-
-        <div id="Interopérabilité5" class="step slide" data-x="5520" data-y="-100">
-            <br>
-            <h1>Clojure depuis java</h1>
-            <br>
-            <pre class="brush: clojure;">
-            (ns calculateur)
-            (defn calcule [args]
-              (apply + args))
-            </pre>
-            <pre class="brush: clojure;">
-            RT.loadResourceScript("calculateur.clj");
-            System.out.println(
-              RT.var("calculateur", "calcule")
-              .invoke(new int[] {1, 2, 3}));
-            </pre>
-        </div>
-
-        <div id="Impur" class="step slide" data-x="5600" data-y="-100">
             <h1>Fonctionnel impur</h1>
-            <br>
             Peu de programmes sont "fonctionnels", plutôt des process :
             <br>
             <ul>
@@ -983,12 +1018,12 @@
               <li>avec état (mémoire ou base de données)</li>
             <ul>
             <br>
-            => amène la question du "temps", différentes réponses à des différents "moments".
+            => amène la question du "temps" et différentes réponses à des différents "moments".
             <br><br>
             => remodéliser et gérer le temps dans un contexte muti-thread.
         </div>
 
-        <div id="Variable" class="step slide" data-x="5680" data-y="-100">
+        <div id="Variable" class="step slide" data-x="5360" data-y="-100">
             <h1>Autrefois..</h1>
             <br>
             Le modèle traditionnel de la variable était adapté dans un contexte mono-thread où le "temps" était représenté par le flux d'exécution du code.
@@ -999,7 +1034,7 @@
             => difficile, fragile
         </div>
 
-        <div id="Identité" class="step slide" data-x="5760" data-y="-100">
+        <div id="Identité" class="step slide" data-x="5440" data-y="-100">
             <h1>Tada !!</h1>
             L'approche concurrentielle de Clojure est caractérisée par le concept d'identité, qui représente une série d'états immuables dans le temps.
             <br><br>
@@ -1009,7 +1044,7 @@
             Dans cette optique, Clojure propose plusieurs types de références mutables, chacun d'eux ayant une sémantique bien définie pour la transition inter-état.
         </div>
 
-        <div id="Concept1" class="step slide" data-x="5840" data-y="-100">
+        <div id="Concept1" class="step slide" data-x="5520" data-y="-100">
             <br><br>
             <h1>La Valeur</h1>
             <br><br>
@@ -1018,7 +1053,7 @@
             
         </div>
 
-        <div id="Concept2" class="step slide" data-x="5920" data-y="-100">
+        <div id="Concept2" class="step slide" data-x="5600" data-y="-100">
             <br>
             <h1>L'identité</h1>
             <br>
@@ -1033,7 +1068,7 @@
             <ul>
         </div>
 
-        <div id="Concept3" class="step slide" data-x="6000" data-y="-100">
+        <div id="Concept3" class="step slide" data-x="5680" data-y="-100">
             <br>
             <h1>L'état</h1>
             <br>
@@ -1046,7 +1081,7 @@
             </ul>
         </div>
 
-        <div id="Immutabilité" class="step slide" data-x="6080" data-y="-100">
+        <div id="Immutabilité" class="step slide" data-x="5760" data-y="-100">
             <h1>Immutabilité</h1>
             <br>
             "Things don't change in place."
@@ -1059,7 +1094,7 @@
             => Tout devrait être immutable : les objets également !
         </div>
 
-        <div id="Marche1" class="step slide" data-x="6160" data-y="-100">
+        <div id="Marche1" class="step slide" data-x="5840" data-y="-100">
             <div class="centered">Marche athlétique</div>
             <br>
             <div class="centered">
@@ -1068,7 +1103,7 @@
             <div class="centered">"Un pied au moins doit être en permanence en contact avec le sol tandis que la jambe de soutien doit être droite (pas pliée au genou) depuis le moment où le pied touche le sol jusqu'à ce qu'elle passe au-dessous du corps"</div>
         </div>
 
-        <div id="Marche2" class="step slide" data-x="6240" data-y="-100">
+        <div id="Marche2" class="step slide" data-x="5920" data-y="-100">
             <h1>En java</h1>
             <br>
             reférence directe sur les jambes du marcheur<br>
@@ -1079,7 +1114,7 @@
             </div>
         </div>
 
-        <div id="Marche3" class="step slide" data-x="6320" data-y="-100">
+        <div id="Marche3" class="step slide" data-x="6000" data-y="-100">
             <h1>En clojure</h1>
             <br>
             reférence indirecte<br>
@@ -1092,7 +1127,7 @@
             </div>
         </div>
 
-        <div id="Concretement1" class="step slide" data-x="6400" data-y="-100">
+        <div id="Concretement1" class="step slide" data-x="6080" data-y="-100">
             <h1>Concrètement</h1>
             <br><br>
             4 types de références mutables en clojure :
@@ -1104,7 +1139,7 @@
             </ul>
         </div>
 
-        <div id="Concretement2" class="step slide" data-x="6480" data-y="-100">
+        <div id="Concretement2" class="step slide" data-x="6160" data-y="-100">
             <h1>Concrètement</h1>
             <br><br>
             Un modèle uniforme de changement d'état :
@@ -1119,7 +1154,7 @@
             </ul>
         </div>
 
-        <div id="Refs1" class="step slide" data-x="6560" data-y="-100">
+        <div id="Refs1" class="step slide" data-x="6240" data-y="-100">
             <h1>Refs</h1>
             <br>
             <ul>
@@ -1130,7 +1165,7 @@
             
         </div>
 
-        <div id="Refs2" class="step slide" data-x="6640" data-y="-100">
+        <div id="Refs2" class="step slide" data-x="6320" data-y="-100">
             <pre class="brush: clojure;">
             (def foo (ref {:me "jane", :you "?"}))
             ;= #'user/foo
@@ -1152,7 +1187,7 @@
             </pre>
         </div>
 
-        <div id="Agents" class="step slide" data-x="6720" data-y="-100">
+        <div id="Agents" class="step slide" data-x="6400" data-y="-100">
             <h1>Agents</h1>
             Les actions envoyés sont mis en queue
             <pre class="brush: clojure;">
@@ -1171,7 +1206,7 @@
             </pre>
         </div>
 
-        <div id="Atoms" class="step slide" data-x="6800" data-y="-100">
+        <div id="Atoms" class="step slide" data-x="6480" data-y="-100">
             <h1>Atoms</h1>
             <br>
             Garantie d'atomicité sur les modifications
@@ -1185,7 +1220,7 @@
             Ici aussi une mise à jour spéculative, la fonction peut-être appelée plusieurs fois.
         </div>
 
-        <div id="Vars1" class="step slide" data-x="6880" data-y="-100">
+        <div id="Vars1" class="step slide" data-x="6560" data-y="-100">
             <h1>Vars</h1>
             <br>
             Ce sont tout simplement les entrées des espaces de nommages, : une correspondance entre un nom et une instance d'un des types vus : fonction, int, atom, etc<br>
@@ -1195,7 +1230,7 @@
             </pre>
         </div>
 
-        <div id="Vars2" class="step slide" data-x="6960" data-y="-100">
+        <div id="Vars2" class="step slide" data-x="6640" data-y="-100">
             <h1>Vars</h1>
             <br>
             Elles offrent cependant un méchanisme utile en multi-thread : le bindings par thread (et en pile) :
@@ -1213,7 +1248,7 @@
             </pre>
         </div>
 
-        <div id="Résumé1" class="step slide" data-x="7040" data-y="-100">
+        <div id="Résumé1" class="step slide" data-x="6720" data-y="-100">
             <h1>En Résumé</h1>
             <ul>
               <li>Les valeurs immutables
@@ -1226,7 +1261,7 @@
             </ul>
         </div>
 
-        <div id="Résumé2" class="step slide" data-x="7120" data-y="-100">
+        <div id="Résumé2" class="step slide" data-x="6800" data-y="-100">
             <h1>En Résumé</h1>
             <br><br>
             Un assortiment de méchanismes de synchronisation des accès en écriture<br>
@@ -1235,7 +1270,7 @@
             <div class="centered"><big>no user locking, no deadlock !</big></div>
         </div>
 
-        <div id="Parallelisme1" class="step slide" data-x="7200" data-y="-100">
+        <div id="Parallelisme1" class="step slide" data-x="6880" data-y="-100">
             <h1>Parallelisme</h1>
             <br>
             On a vu (furtivement) pmap mais il existe d'autres mécanismes abstrayant la distribution de calculs sur plusieurs threads :
@@ -1249,7 +1284,7 @@
             </pre>
         </div>
 
-        <div id="Parallelisme2" class="step slide" data-x="7280" data-y="-100">
+        <div id="Parallelisme2" class="step slide" data-x="6960" data-y="-100">
             <pre class="brush: clojure;">
             (def d (delay (println "Running...") :done!))
             ;= #'user/d ; 
@@ -1269,7 +1304,25 @@
             </pre>
         </div>
 
-        <div id="More1" class="step slide" data-x="7360" data-y="-100">
+        <div id="Outils" class="step slide" data-x="7040" data-y="-100">
+            
+            <ul>
+              <li>Eclipse : Counterclockwise<br>
+            http://http://code.google.com/p/counterclockwise<li>
+              <li>Intellij IDEA: LaClojure<br>
+            http://plugins.intellij.net/plugin/?id=4050<li>
+                <li>NetBeans : Enclojure<br>
+            http://enclojure.org/<li>
+                <li>Emacs, Vi, ..<li>
+            <ul>
+            
+            <ul>
+              <li>Lein : http://leiningen.org/</li>
+              <li>https://clojars.org/</li>
+            <ul>
+        </div>
+
+        <div id="More1" class="step slide" data-x="7120" data-y="-100">
             <h1>Mais encore ?<br><br><big>Clojure n'est pas un langage pour la JVM !</big></h1>
             C'est un langage "hébergé" : JVM, CLR, Javascript, Python, ...
             <br><br><br>
@@ -1288,7 +1341,7 @@
             </q>
         </div>
 
-        <div id="More2" class="step slide" data-x="7440" data-y="-100">
+        <div id="More2" class="step slide" data-x="7200" data-y="-100">
             <h1>Mais encore ?<br><br><big>Clojure n'est pas un langage dynamique !</big></h1>
             Bon si.. mais
             <pre class="brush: clojure;">
@@ -1304,9 +1357,10 @@
             (https://github.com/frenchy64/typed-clojure)
         </div>
 
-        <div id="Références1" class="step slide" data-x="7520" data-y="-100">
+        <div id="Références1" class="step slide" data-x="7280" data-y="-100">
             
             http://clojure.org<br>
+            http://clojure.org/cheatsheet<br>
             https://github.com/clojure<br>
             <br>
             <b>Rich Hickey !</b><br>
@@ -1325,7 +1379,7 @@
             et beaucoup beaucoup d'autres..
         </div>
 
-        <div id="Références2" class="step slide" data-x="7600" data-y="-100">
+        <div id="Références2" class="step slide" data-x="7360" data-y="-100">
             
             <img src="img/clojureprogramming.jpg">
             <img src="img/joyofclojure.jpg">

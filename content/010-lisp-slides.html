@@ -29,7 +29,7 @@
 <ul>
     <li>Une syntaxe régulière, les opérateurs sont des fonctions</li>
     <li>Un nombre d'arguments variables : (+ 1 2 3)</li>
-    <li>Pas de casse-tête de priorité d'opérateur !</li>
+    <li>Pas de casse-tête de priorité d'opérateurs !</li>
 </ul>
 <br>
 <pre class="brush: clojure;">
@@ -41,31 +41,41 @@
 <!--#S-expression1#-->
 <br>
 A l'inverse de nombreux langages, il n'existe pas de "Statement"<br>
-Tout est expression dont l'évaluation donne une valeur unique, même les constructions de type if, for, etc<br><br>
-Exemples :<br>
+Tout est expression dont l'évaluation donne une valeur unique, même les constructions de type if, for, etc<br>
 <pre class="brush: clojure;">
 1
 ;= 1
+
 [1 2 3] ; Vecteur
 ;= [1 2 3]
+
 (println "Bonjour et bienvenus BreizhCampeurs !")
 ; Bonjour et bienvenus BreizhCampeurs !
 ;= nil
+
 (+ 1 2)  ; Appel de fonction
 ;= 3
 </pre>
 <!--/-->
 
 <!--#S-expression2#-->
-<br><br>
+<br>
 La structure régulière facilite l'apprentissage du langage<br>
 <br>
 <pre class="brush: clojure;">
 (def a 1) ; int a = 1;
 ;= #'user/a 
+
 (inc a) ; a++; ou ++a; ou a+=1; ou a+1;
 ;= 2
+
 (if (odd? a) (/ a 2) a) ; a%2 != 0 ? a / 2 : a;
+;= 1/2
+
+(defn square [x]
+  "Met au carré"
+  (* x x))
+;= #'user/square
 </pre>
 <!--/-->
 
@@ -149,17 +159,35 @@ La structure régulière facilite l'apprentissage du langage<br>
 </pre>
 <!--/-->
 
+<!--#Lisp2#-->
+<br><br>
+<h1>"Practical LISP on the JVM"</h1>
+<br>
+<q>
+"Lisp is a programmable programming language."<br>
+John Foderaro, CACM, September 1991<br>
+<br>
+"Lisp isn't a language, it's a building material."<br>
+Alan Kay
+</q>
+
+<!--/-->
+
 
 <!--#REPL1#-->
 <div class="centered">La Read–Eval–Print Loop<br>Un outil de développement interactif</div>
-<!--<iframe src="http://tryclj.com/" width="100%" height="700">
+<!--
+<iframe src="http://tryclj.com/" width="100%" height="700">
   <p>Your browser does not support iframes.</p>
 </iframe>
 -->
 <!--/-->
 
 <!--#REPL2#-->
-La modularité clojure repose sur l'utilisation d'espace de nommage
+<br><br>
+<h1>user=> ??</h1>
+La modularité clojure repose sur l'utilisation d'espaces de nommage
+<br>
 <pre class="brush: clojure;">
 (ns ^{:doc "The core Clojure language."
        :author "Rich Hickey"}
@@ -263,21 +291,31 @@ nil ; équivalent du null java, vaut false
 <!--/-->
 
 <!--#dataStructure1#-->
-Clojure offre un ensemble de structure de données
+<br>
+et un ensemble de structures de données :
 <pre class="brush: clojure;">
-(get [1 2 3 4] 2) ; Vecteur, indexé 
+; Le vecteur, indexé 
+(get [1 2 3 4] 2)
 ;= 3
-({:name "Clojure", :auteur "Rich Hickey"} :name) ; Map
+
+; Map
+({:name "Clojure", :auteur "Rich Hickey"} :name)
 ;= "Clojure"
-(#{\a \e \i \o \u} \a) ; Set
+
+; Set
+(#{\a \e \i \o \u} \a)
 ;= \a
-(second '(\a \e \i \o \u)) ; Une liste (chainée simple)
+
+; Une liste (chainée simple)
+(second '(\a \e \i \o \u))
 ;= \e
 </pre>
 <!--/-->
 
 <!--#dataStructure2#-->
+<br><br>
 Ces structures sont manipulées au travers de 7 abstractions :
+<br><br>
 <ul>
     <li>Collection</li>
     <li>Sequence</li> 
@@ -290,41 +328,59 @@ Ces structures sont manipulées au travers de 7 abstractions :
 <!--/-->
 
 <!--#Collection1#-->
+<h1>Collection</h1>
 Toutes les structures de données clojure sont des collections
 <pre class="brush: clojure;">
 (def c (conj [] 1 2 3))
 ;= #'user/c
 c
 ;= [1 2 3]
+
 (count c)
 ;= 3
+
 (conj '(1 2) 3)
 ;= (3 1 2)
+
 (conj [1 2] 3)
 ;= [1 2 3]
-
 </pre>
 <!--/-->
 
 <!--#Sequence1#-->
-<h1>La sequence est une abstraction essentielle du langage</h1>
-Toutes les collections clojure, celle de Java, les maps Java, CharSequence (dont String), les Iterable, les Arrays et même nil sont des séquences.<br>
+<br>
+<h1>Sequence, une abstraction essentielle du langage</h1>
+<br>
+Toutes les Collections clojure et Java, les maps Java, les CharSequence (dont String), les Iterable, les Arrays et même nil sont des séquences.<br>
+<br>
 Concrètement un répertoire et un fichier sont des séquences, les enregistrements d'une table de BD forment une séquence, ..<br>
-cons, first, second, rest, next ; seq, lazy-seq 
+<br>
+L'intérêt principal des sequences est l'<b>évaluation paresseuse</b>, et les <b>séquences infinies</b>
+<!--/-->
+
+<!--#Sequence2#-->
+<br>
 <pre class="brush: clojure;">
 (cons 3 '(1 2)) ou (cons 3 [1 2])
 ;= (3 1 2)
+
+; first, second, rest, last, butlast
+
 (defn random-ints [limit]
   (lazy-seq
     (cons (rand-int limit)
           (random-ints limit))))
 ;= #'user/random-ints
+
 (take 10 (random-ints 50))
 ;= (49 5 2 30 35 27 16 17 6 16)
 </pre>
+<br>
+http://clojure.org/Sequences
 <!--/-->
 
 <!--#Associative1#-->
+<h1>Associative</h1>
 <pre class="brush: clojure;">
 (def m (assoc {} :fname "Rich" :lname "Hickey"))
 ;= #'user/m
@@ -343,13 +399,17 @@ cons, first, second, rest, next ; seq, lazy-seq
 <!--/-->
 
 <!--#Indexed1#-->
+<h1>Indexed</h1>
 <pre class="brush: clojure;">
 (def v [:a :b :c])
 ;= #'user/v
-(nth v 2)
+
+(nth v 2) ; ou (v 2) car v est "Associative" !
 ;= :c
-(nth v 3) ; possibilité de valeur par défaut
+(nth v 3)
 ;= IndexOutOfBoundsException ..
+(nth v 3 0) ; possibilité de valeur par défaut
+;= 0
 (get v 3)
 ;= nil
 (get :?? 3)
@@ -358,36 +418,43 @@ cons, first, second, rest, next ; seq, lazy-seq
 <!--/-->
 
 <!--#Stack#-->
+<h1>Stack</h1>
 <pre class="brush: clojure;">
 (def s (conj '() 1 2 3))
 ;= #'user/s
 s
 ;= (3 2 1)
+
 (peek s)
 ;= 3
+
 (pop s)
 ;= (2 1)
 </pre>
 <!--/-->
 
 <!--#Set#-->
+<h1>Set</h1>
 <pre class="brush: clojure;">
 (disj #{1 2 3} 3 1)
 ;= #{2}
 </pre>
+<br>
 clojure.set : union, intersection, projection, etc
 <!--/-->
 
 <!--#Sorted#-->
-Applicable sur les sorted-map et sorted-set
+<h1>Sorted</h1>
 <pre class="brush: clojure;">
 (def sm (sorted-map 
   :lname "Hickey" :fname "Rich" :age :??))
 ;= #'user/sm
 sm
-;= {:age :inconnu, :fname "Rich", :lname "Hickey"}
+;= {:age :??, :fname "Rich", :lname "Hickey"}
+
 (rseq sm)
 ; ([:lname "Hickey"] [:fname "Rich"] [:age :??])
+
 (subseq sm > :b < :l)
 ;= ([:fname "Rich"])
 </pre>
@@ -531,6 +598,7 @@ Le code clojure est plus dense que le code Java (d'un facteur ~10)
 
 <!--#fonctionnel4#-->
 
+
 recursive iteration instead of side-effect based looping
 Clojure is impure, in that it doesn't force your program to be referentially transparent, and doesn't strive for 'provable' programs. The philosophy behind Clojure is that most parts of most programs should be functional, and that programs that are more functional are more robust.
 
@@ -554,29 +622,7 @@ transparence référentielle exploitée par l'évaluation paresseuse (pas par d�
 <!--/-->
 
 
-<!--#fonctionnel6#-->
-<h1>Laziness</h1>
 
-<pre class="brush: clojure;">
-
-</pre>
-
-<!--/-->
-
-
-
-
-
-
-
-<!--#lisp4#-->
-<pre class="brush: clojure;">
-(defn square [x]
-"Met au carré"
-  (* x x))
-(square 3)
-</pre>
-<!--/-->
 
 
 
