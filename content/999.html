@@ -1,7 +1,40 @@
     </div>
 
+      <img id="kiss1" class="kiss" style="position:fixed; display:none; "src="img/kiss1.png">
+
     <script src="js/impress.js"></script>
     <script>impress().init();</script>
+
+    <script>
+
+function ShowHide(element) {
+   if (!element) return;
+   if (element.style.display == "none" ) {
+      element.style.display = "" ;
+   } else {
+      element.style.display = "none" ;
+   }
+} 
+
+function random(min, max) {
+   return Math.round(min + Math.random()*(max - min))
+}
+
+document.addEventListener("keyup", function ( event ) {
+            if ( event.keyCode === 75 ) {
+                switch( event.keyCode ) {
+                    case 75: 
+                             element = document.getElementById("kiss"+random(1, 1));
+                             element.style.top = ""+random(0, 70)+"%";
+                             element.style.right = ""+random(0, 70)+"%";
+			     ShowHide(element) ;
+                             break;
+                }
+                
+                event.preventDefault();
+            }
+        }, false);
+    </script>
 
   </body>
 

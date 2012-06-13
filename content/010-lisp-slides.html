@@ -4,7 +4,8 @@
 <h1>"Practical LISP on the JVM"</h1>
 <br>
 <ul>
-    <li>Une syntaxe à base S-expression, une notation préfixée parenthésée</li>
+    <li>Une syntaxe à base S-expression,
+une notation préfixée</li>
     <li>Un REPL</li>
     <li>typage dynamique (mais fort)</li>
     <li>fonctionnel impur</li>
@@ -17,7 +18,7 @@
 <h1>Lots of Irritating Superfluous Parenthesis !<br>(mais moins que LISP !)</h1>
 <br>
 <ul>
-    <li>LISP aka LISt Processing. Le couple de parenthèses définit une liste.
+    <li>LISP aka LISt Processing.<br> Le couple de parenthèses définit une liste.<br><br>
     <li>mais éléments de syntaxe tel que les vecteurs [], les maps {}</li>
     <li>au final pas davantage de tokens de structuration que les autres langages</li>
 </ul>
@@ -40,8 +41,8 @@
 
 <!--#S-expression1#-->
 <br>
-A l'inverse de nombreux langages, il n'existe pas de "Statement"<br>
-Tout est expression dont l'évaluation donne une valeur unique, même les constructions de type if, for, etc<br>
+A l'inverse de nombreux langages, il n'existe pas de "Statement"<br><br>
+Tout est expression dont l'évaluation donne une valeur unique, même les constructions de type if, for, ..<br><br>
 <pre class="brush: clojure;">
 1
 ;= 1
@@ -59,8 +60,8 @@ Tout est expression dont l'évaluation donne une valeur unique, même les constr
 <!--/-->
 
 <!--#S-expression2#-->
-<br>
-La structure régulière facilite l'apprentissage du langage<br>
+<br><br>
+Cette structure régulière facilite l'apprentissage du langage<br>
 <br>
 <pre class="brush: clojure;">
 (def a 1) ; int a = 1;
@@ -85,7 +86,7 @@ La structure régulière facilite l'apprentissage du langage<br>
 <br>
 <ul>
     <li>Chaque S-expression est un literal ou une liste</li>
-    <li>Facilite la création de mini-langages adaptés aux besoins : DSL</li>
+    <li>Facilite la création de mini-langages adaptés aux besoins, les Domain Specific Languages</li>
     <li>Une grand partie du langage est défini à partir de macros !</li>
 </ul>
 <!--/-->
@@ -104,6 +105,7 @@ La structure régulière facilite l'apprentissage du langage<br>
 <!--/-->
 
 <!--#Macro2#-->
+<br><br>
 <pre class="brush: clojure;">
 (defmacro with-open
   [bindings & body]
@@ -126,13 +128,15 @@ La structure régulière facilite l'apprentissage du langage<br>
 
 <!--#DSL1#-->
 <div class="centered">DSL : Enlive (HTML templating)</div>
-<br>
+<br><br>
 <pre class="brush: clojure;">
 (defn home-page []
   (html
+
     [:head
      (include-css "/static/site.css")
      [:title *title*]]
+
     [:body 
      [:a {:href "http://clj-la.org"} 
       [:img {:id "logo" :src "logo.png"}]]
@@ -153,20 +157,22 @@ La structure régulière facilite l'apprentissage du langage<br>
 (with-results [rs (table :customer)]
   (doseq [r rs] (println (:lastname r)))
 
-(conj! (table :customer) {:age 22})
+(conj! (table :customer) {:firstname "Rich"})
 
-(conj! (table :customer) [{:age 22} {:age 23}])
+(conj! (table :customer)
+  [{:firstname "Rich" :lastname "Hickey"}
+   {:firstname "Stuart" :lastname "Halloway"}])
 </pre>
 <!--/-->
 
 <!--#Lisp2#-->
 <br><br>
 <h1>"Practical LISP on the JVM"</h1>
-<br>
+<br><br>
 <q>
 "Lisp is a programmable programming language."<br>
 John Foderaro, CACM, September 1991<br>
-<br>
+<br><br>
 "Lisp isn't a language, it's a building material."<br>
 Alan Kay
 </q>
@@ -176,8 +182,9 @@ Alan Kay
 
 <!--#REPL1#-->
 <div class="centered">La Read–Eval–Print Loop<br>Un outil de développement interactif</div>
+<br>
 <!--
-<iframe src="http://tryclj.com/" width="100%" height="700">
+<iframe src="http://tryclj.com/" width="100%" height="530">
   <p>Your browser does not support iframes.</p>
 </iframe>
 -->
@@ -187,20 +194,24 @@ Alan Kay
 <br><br>
 <h1>user=> ??</h1>
 La modularité clojure repose sur l'utilisation d'espaces de nommage
-<br>
+<br><br>
 <pre class="brush: clojure;">
 (ns ^{:doc "The core Clojure language."
        :author "Rich Hickey"}
   clojure.core)
 ; <->
+
 (defn require
 ; <->
+
 (defn use
+; <->
 </pre>
 <!--/-->
 
 <!--#REPL3#-->
-On utilise require et use pour lier ou importer d'autres namespaces
+<br>
+On utilise require et use pour lier ou importer d'autres namespaces.<br>
 clojure.core et java.lang sont importés par défaut
 <pre class="brush: clojure;">
 (def input (java.io.StringReader.
@@ -238,15 +249,21 @@ clojure.core et java.lang sont importés par défaut
 <!--/-->
 
 <!--#REPL5#-->
-<br><br>
+<br>
 <h1>Quelques fonctions utiles dans un REPL</h1>
 <pre class="brush: clojure;">
 all-ns ; sequence de tous les namespaces
+
 ns-publics ; contenu public d'un namespace
+
 apropos ; recherche par regexp dans les noms
+
 find-doc ; recherche par regexp dans les docs
+
 source ; affiche les sources d'une fonction/macro
+
 pst ; affiche la stacktrace, *e pour la dernière
+
 javadoc ; charge la doc java demandée
 </pre>
 
@@ -277,14 +294,19 @@ javadoc ; charge la doc java demandée
 ;= \A
 "Bonjour BreizhCampeurs !" ; chaînes
 ;= "Bonjour BreizhCampeurs !"
+
 true ; booléens
 ; = true
+
 (+ 1 1/7) ; long, double, bigint/decimal + ratio
 ;= 8/7
+
 :pizza4all ; Keyword
 ;= :pizza4all
+
 (re-find #"\d+" "a123de") ; regexp
 ;= "123"
+
 nil ; équivalent du null java, vaut false 
 ;= nil
 </pre>
@@ -293,6 +315,7 @@ nil ; équivalent du null java, vaut false
 <!--#dataStructure1#-->
 <br>
 et un ensemble de structures de données :
+<br><br>
 <pre class="brush: clojure;">
 ; Le vecteur, indexé 
 (get [1 2 3 4] 2)
@@ -313,8 +336,8 @@ et un ensemble de structures de données :
 <!--/-->
 
 <!--#dataStructure2#-->
-<br><br>
-Ces structures sont manipulées au travers de 7 abstractions :
+<br><br><br><br>
+manipulées au travers de 7 abstractions :
 <br><br>
 <ul>
     <li>Collection</li>
@@ -329,7 +352,8 @@ Ces structures sont manipulées au travers de 7 abstractions :
 
 <!--#Collection1#-->
 <h1>Collection</h1>
-Toutes les structures de données clojure sont des collections
+Toutes les structures de données clojure sont des collections<br>
+<br>
 <pre class="brush: clojure;">
 (def c (conj [] 1 2 3))
 ;= #'user/c
@@ -353,18 +377,18 @@ c
 <br>
 Toutes les Collections clojure et Java, les maps Java, les CharSequence (dont String), les Iterable, les Arrays et même nil sont des séquences.<br>
 <br>
-Concrètement un répertoire et un fichier sont des séquences, les enregistrements d'une table de BD forment une séquence, ..<br>
+Concrètement un répertoire et un fichier sont des séquences, les enregistrements d'une table de BD forment une séquence<br>
 <br>
 L'intérêt principal des sequences est l'<b>évaluation paresseuse</b>, et les <b>séquences infinies</b>
 <!--/-->
 
 <!--#Sequence2#-->
-<br>
+<br><br>
 <pre class="brush: clojure;">
 (cons 3 '(1 2)) ou (cons 3 [1 2])
 ;= (3 1 2)
 
-; first, second, rest, last, butlast
+; first, second, rest, last, butlast, ..
 
 (defn random-ints [limit]
   (lazy-seq
@@ -375,26 +399,33 @@ L'intérêt principal des sequences est l'<b>évaluation paresseuse</b>, et les 
 (take 10 (random-ints 50))
 ;= (49 5 2 30 35 27 16 17 6 16)
 </pre>
-<br>
+<br><br><br>
 http://clojure.org/Sequences
 <!--/-->
 
 <!--#Associative1#-->
-<h1>Associative</h1>
+<div class="centered">Associative</div>
+<br>
 <pre class="brush: clojure;">
 (def m (assoc {} :fname "Rich" :lname "Hickey"))
 ;= #'user/m
+
 (get m :lname) ; ou (m :lname) ou même (:lname m)
 ;= "Hickey"
+
 (get m :age "inconnu")
 ;= "inconnu"
+
 (dissoc m :fname :age)
 ;= {:lname "Hickey"}
+
 (contains? m :fname)
 ;= true  ; !?!
+
 (assoc [1 2 3 4] 2 15)
 ; [1 2 15 4]
-; keys, vals, etc
+
+; keys, vals, ..
 </pre>
 <!--/-->
 
@@ -406,12 +437,16 @@ http://clojure.org/Sequences
 
 (nth v 2) ; ou (v 2) car v est "Associative" !
 ;= :c
+
 (nth v 3)
 ;= IndexOutOfBoundsException ..
+
 (nth v 3 0) ; possibilité de valeur par défaut
 ;= 0
+
 (get v 3)
 ;= nil
+
 (get :?? 3)
 ;= nil
 </pre>
@@ -436,10 +471,15 @@ s
 <!--#Set#-->
 <h1>Set</h1>
 <pre class="brush: clojure;">
-(disj #{1 2 3} 3 1)
+(def s #{1 2 3})
+;= #'user/s
+s
+;= #{1 2 3}
+
+(disj s 3 1)
 ;= #{2}
 </pre>
-<br>
+<br><br>
 clojure.set : union, intersection, projection, etc
 <!--/-->
 
@@ -480,17 +520,17 @@ En clojure
 
 
 <!--#Map1#-->
-<h1>Map<br><br><br><img src="img/map.png" width="50%"></h1>
+<h1>Map<br><br><br><br><img src="img/map.png" width="50%"></h1>
 <pre class="brush: clojure;">
 (map #(+ 10 %1) [ 1 3 5 7 ])
 ;= (11 13 15 17)
 </pre>
-<br>
+<br><br><br>
 (http://techbehindtech.com/)
 <!--/-->
 
 <!--#Reduce1#-->
-<h1>Reduce<br><br><br><img src="img/reduce.png" width="50%"></h1>
+<h1>Reduce<br><br><br><br><img src="img/reduce.png" width="60%"></h1>
 <pre class="brush: clojure;">
 (reduce * [2 3 4])
 ;= 24
@@ -498,7 +538,7 @@ En clojure
 <!--/-->
 
 <!--#Filter1#-->
-<h1>Filter<br><br><br><img src="img/filter.png" width="50%"></h1>
+<h1>Filter<br><br><br><br><img src="img/filter.png" width="50%"></h1>
 <pre class="brush: clojure;">
 (filter even? [1 2 3 4 5 6])
 ;= (2 4 6)
@@ -508,9 +548,9 @@ En clojure
 <!--#Iterate1#-->
 <h1>Iterate</h1>
 <br><br>
-<q>Returns a lazy sequence of x, (f x), (f (f x)) etc.<br>
-f must be free of side-effects</q>
-<br>
+<q>"Returns a lazy sequence of x, (f x), (f (f x)) etc.<br>
+f must be free of side-effects"</q>
+<br><br>
 <pre class="brush: clojure;">
 (take 10 (iterate (partial + 2) 0))
 (0 2 4 6 8 10 12 14 16 18)
@@ -520,7 +560,7 @@ f must be free of side-effects</q>
 
 
 <!--#Exemple1#-->
-
+<br><br>
 <pre class="brush: clojure;">
 
 // http://commons.apache.org/lang/StringUtils
@@ -561,12 +601,16 @@ public static int indexOfAny(String str,
 ;  more binding-form/collection-expr pairs, each
 ;  followed by zero or more modifiers, and yields
 ;  a lazy sequence of evaluations of expr.
+
+;Un autre petit exemple au passage :
+(take 9 (for [x (range)
+           :when (> (* x x) 3)] (* 2 x)))
+;= (4 6 8 10 12 14 16 18 20)
 </pre>
 (Stuart Halloway)
 <!--/-->
 
 <!--#Exemple3#-->
-<br>
 <pre class="brush: clojure;">
 (index-filter #{\a \e \i \o \u} "Br  zhC mp urs")
 ;= (11)
@@ -578,6 +622,7 @@ public static int indexOfAny(String str,
   ["Bonjour" "les" "BreizhCampeurs" "!"])
 ;= (0 2)
 </pre>
+<br><br>
 => la prog fonctionnelle construire la généralisation : lazy-sequence de <b>toutes</b> les correspondances pour un <b>prédicat</b> sur une <b>séquence</b><br>
 <br>
 (~20 méthodes de StringUtils : countMatches, indexOf, indexOfAny, indexOfAnyBut, indexOfIgnoreCase + les mêmes pour last, + nth, etc..)
@@ -589,40 +634,48 @@ public static int indexOfAny(String str,
 <br><br>
 <h1>Lisibilité<br>effort total = effort par line x nombre de lignes</h1>
 <br>
-Le code clojure est plus dense que le code Java (d'un facteur ~10)
+Le code clojure est plus dense que le code Java (d'un facteur 10)<br>
+<br><br>
+<div class="centered">
+marginalement par la syntaxe<br> ou les petites attentions (with-open..)<br><br>
+principalement par la<br><b>généricité des structures de données et des traitements</b>
+</div>
+<!--/-->
+
+<!--#Syntaxe4#-->
+<br>
+<h1>"The Kingdom of Nouns"</h1>
+
+Entre applications, nous utilisons de la donnée pure. Pourquoi ne le faisons nous pas à l'intérieur de nos programmes ?<br>
+<br><br>
+Un objet<br><br>
 <ul>
-    <li>marginalement du fait de la syntaxe ou de petites attentions (with-open..) </li>
-    <li>principalement du fait de la généricité des structures de données et des traitements</li>
+    <li>réinvente la roue again, and again, and again, and..</li> 
+    <li>a des méthodes information-specific</li>
+    <li>lie la logique externe à cette implémentation au lieu d'utiliser des traitements génériques</li>
+    <li>empeche du coup la composition</li>
 </ul>
 <!--/-->
 
-<!--#fonctionnel4#-->
-
-
-recursive iteration instead of side-effect based looping
-Clojure is impure, in that it doesn't force your program to be referentially transparent, and doesn't strive for 'provable' programs. The philosophy behind Clojure is that most parts of most programs should be functional, and that programs that are more functional are more robust.
-
-
-functionnel non seulement high order function
-mais surtout côté immutabilité que nous verrons un peu plus loin
-
-transparence référentielle exploitée par l'évaluation paresseuse (pas par défaut comme haskell car non pur !), pour la parallélisation, par les méchanismes de synchro, facilite évidemment le test !
-
+<!--#fonctionnel3#-->
+<h1>Clojure est donc fonctionnel...<br> mais impur !</h1> 
+<br>
+Il ne force pas à la transparence référencielle, à l'absence d'effets de bord<br>
+<br>
+Cependant :
+<div class="centered">
+<q>"Most parts of most programs should be functional"</q>
+<q>"Programs that are more functional are more robust"</q>
+<br><br>
+</div>
+La transparence référentielle est encouragé car exploitée 
+<ul>
+  <li>par l'évaluation paresseuse</li>
+  <li>par la parallélisation</li>
+  <li>par les méchanismes de synchro</li>
+  <li>car elle facilite évidemment le test !</li>
+</ul>
 <!--/-->
-
-
-<!--#fonctionnel5#-->
-<h1>List comprehension</h1>
-
-<pre class="brush: clojure;">
-(take 20 (for [x (range) :when (> (* x x) 3)] (* 2 x)))
-;= (4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42)
-</pre>
-
-<!--/-->
-
-
-
 
 
 

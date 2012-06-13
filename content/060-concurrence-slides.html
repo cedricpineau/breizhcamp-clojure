@@ -1,20 +1,22 @@
 
 <!--#Impur#-->
 <br>
-<h1>Fonctionnel impur</h1>
-Peu de programmes sont "fonctionnels", plutôt des process :
-<br>
+<h1>Un langage pour la concurrence</h1>
+Peu de programmes sont "fonctionnels", ce sont des process :
 <ul>
-  <li>avec des effets de bord</li>
-  <li>avec état (mémoire ou base de données)</li>
+  <li>des effets de bord</li>
+  <li>des états (mémoire ou base de données)</li>
+  <li>=> notion de "temps" et différentes réponses à différents "moments".</li>
 <ul>
-<br>
-=> amène la question du "temps" et différentes réponses à des différents "moments".
+<br><br><br>
+<div class="centered">
+La gestion des états en mémoire est un casse-tête dans un contexte muti-thread.
 <br><br>
-=> remodéliser et gérer le temps dans un contexte muti-thread.
+Clojure aborde cette question sous un angle "nouveau"</div>
 <!--/-->
 
 <!--#Variable#-->
+<br>
 <h1>Autrefois..</h1>
 <br>
 Le modèle traditionnel de la variable était adapté dans un contexte mono-thread où le "temps" était représenté par le flux d'exécution du code.
@@ -26,105 +28,107 @@ Avec plusieurs threads, il n'y a plus de sequence d'exécution, plus de maitrise
 <!--/-->
 
 <!--#Identité#-->
-<h1>Tada !!</h1>
-L'approche concurrentielle de Clojure est caractérisée par le concept d'identité, qui représente une série d'états immuables dans le temps.
-<br><br>
-Comme les états sont des valeurs fixes, un nombre indéfini de threads peut les consulter en parallèle<br>
-gérer la concurrence c'est gérer les changements d'un état à un autre.<br>
 <br>
-Dans cette optique, Clojure propose plusieurs types de références mutables, chacun d'eux ayant une sémantique bien définie pour la transition inter-état.
-<!--/-->
+<h1>Tada !!</h1>
+L'approche concurrentielle de Clojure est caractérisée par le concept d'<b>identité</b>, qui représente une <b>série d'états</b> immuables <b>dans le temps</b>.
+<br><br><br><br>
+<div class="centered">Les états sont consultables en parallèle.<br><br>
+Gérer la concurrence,<br>gérer le temps,<br>c'est gérer le passage d'un état à un autre.</div>
 
+<br><br>
+<!--/-->
 
 <!--#Concept1#-->
-<br><br>
-<h1>La Valeur</h1>
-<br><br>
-42, une date, une collection.<br>
-Une valeur est immutable
-
-<!--/-->
-
-<!--#Concept2#-->
+<h1>Trois concepts<br>#1 L'identité</h1>
 <br>
-<h1>L'identité</h1>
-<br>
-Une entité logique l'on associe a une série de valeur (d'état) liés dans le temps.
+Une série d'états liés dans le temps.
 <br><br>
 
 <br>
 <ul>
-  <li>Pas un nom ! Une identity peut avoir plusieurs nom. J'appelle ma mère maman, vous l'appelez madame pineau !</li>
-  <li>Monnaie : le franc, puis l'euro, bientôt le franc ? Juste une valeur de l'identité monnaie.</li>
-  <li>Peut-être composée. L'identité gvt a pris une nouvelle valeur du fait des élections</li>
+  <li>Pas un nom ! Une identité porte plusieurs noms.<br>J'appelle ma mère maman, vous l'appelez madame Pineau !</li><br>
+  <li>Pas stable ! Une succession d'état<br>
+Monnaie en france : le franc, puis l'euro, bientôt le franc ?</li><br>
+  <li>Peut-être composée. L'identité gouvernement a pris une nouvelle valeur du fait des élections !</li>
+<ul>
+<!--/-->
+
+<!--#Concept2#-->
+<br><br>
+<h1>Trois concepts<br>#2 La Valeur</h1>
+<br><br>
+Une valeur est par définition quelque chose d'immuable :<br><br>
+<ul>
+  <li>42</li>
+  <li>Une date</li>
+  <li>Un ensemble de données</li>
 <ul>
 <!--/-->
 
 <!--#Concept3#-->
+<br><br>
+<h1>Trois concepts<br>#3 L'état</h1>
 <br>
-<h1>L'état</h1>
-<br>
-"State is a value of an identity at a time"
+L'état, c'est la <b>valeur</b> d'une identité à un instant donné
 <br><br><br>
-Il en découle :
-<ul>
-  <li>ce qui gère le temps doit faire ref à des valeurs</li>
-  <li>le temps est réprésenté par les changements d'état, piloté par un ensemble d'outils</li>
-</ul>
+=> ce qui gère le temps doit manipuler des <b>valeurs</b>
 <!--/-->
 
-
 <!--#Immutabilité#-->
-<h1>Immutabilité</h1>
-<br>
-"Things don't change in place."
-<br><br><br>
-Ne pas oublier la dimension temps : x/y/z et t !<br>
-Emplacement memoire et t !<br><br>
+<h1>Immutabilité<br>"Things don't change in place."<br>Le futur est fonction du passé mais ne le change pas.</h1>
 
-t étant la séquence de fonctions de changements d'état, le futur est fonction du passé mais ne le chnage pas.
 <br><br>
-=> Tout devrait être immutable : les objets également !
+<div class="centered">
+=> Tous les types clojure vus jusqu'ici sont immuables !
+<br><br><br>
+De manière efficace dans l'espace<br>
+De manière efficace dans le temps
+<br><br>
+(repose sur le partage de sous-structures, possible puisque immuables !)
+</div>
 <!--/-->
 
 
 <!--#Marche1#-->
-<div class="centered">Marche athlétique</div>
+<div class="centered">Illustration : La marche athlétique</div>
 <br>
 <div class="centered">
-    <img src="img/marche.png">
+    <img src="img/marche.png" height="70%">
 </div>
-<div class="centered">"Un pied au moins doit être en permanence en contact avec le sol tandis que la jambe de soutien doit être droite (pas pliée au genou) depuis le moment où le pied touche le sol jusqu'à ce qu'elle passe au-dessous du corps"</div>
+<div class="centered">"Un pied au moins doit être en permanence en contact avec le sol tandis que la jambe de soutien doit être droite depuis le moment où le pied touche le sol jusqu'à ce qu'elle passe au-dessous du corps"</div>
 <!--/-->
 
 <!--#Marche2#-->
 <h1>En java</h1>
 <br>
-reférence directe sur les jambes du marcheur<br>
-lock (stop the world !) pour avoir les positions des deux simultanément.<br>
-<br>
+Reférence directe sur les jambes du marcheur<br>
+=> lock (stop the world !) pour avoir les positions des deux simultanément.<br>
+<br><br>
 <div class="centered">
-    <img src="img/variables.png">
+    <img src="img/variables.png" width="100%">
 </div>
 <!--/-->
 
 <!--#Marche3#-->
 <h1>En clojure</h1>
 <br>
-reférence indirecte<br>
-prise d'un snapshot (un état) par déréférencement.<br>
+Reférence indirecte<br>
+Prise d'un snapshot (un état) par déréférencement.<br><br>
 L'état est une value, immutable.<br>
 Je suis hors du temps pour détecter la faute<br>
-<br>
+<br><br>
 <div class="centered">
-    <img src="img/refs.png">
+    <img src="img/refs.png" width="100%">
 </div>
 <!--/-->
 
 <!--#Concretement1#-->
+<br>
 <h1>Concrètement</h1>
 <br><br>
-4 types de références mutables en clojure :
+Clojure propose 4 types de références mutables<br>
+<br><br>
+Chacun avec sa sémantique pour la transition inter-état :
 <ul>
   <li>refs : partagé/synchrone/coordonné</li>
   <li>agents : partagé/asynchrone/autonome</li>
@@ -134,6 +138,7 @@ Je suis hors du temps pour détecter la faute<br>
 <!--/-->
 
 <!--#Concretement2#-->
+<br>
 <h1>Concrètement</h1>
 <br><br>
 Un modèle uniforme de changement d'état :
@@ -142,24 +147,20 @@ Un modèle uniforme de changement d'état :
 </pre>
 <br>
 <ul>
-  <li>la fonction recoit l'état courant (en plus des args) et retourne l'état suivant</li>
-  <li>snapshot de l'état courant tojours dispo avec deref</li>
-  <li>pas de user locks, pas de deadlocks</li>
+  <li>recoit l'état courant (en + des args) et retourne l'état suivant</li>
+  <li>snapshot de l'état courant toujours disponible via deref</li>
+  <li>pas de locks</li>
 </ul>
 <!--/-->
 
 <!--#Refs1#-->
-<h1>Refs</h1>
+<div class="centered">Refs</div>
 <br>
 <ul>
-  <li>Modifié via le Software Transactional Memory, ACI !</li>
+  <li>Utilise un Software Transactional Memory (ACI) !</li>
   <li>via une transaction : (dosync ..)</li>
   <li>spéculative (rejoue la fonction si conflit)</li>
 </ul>
-
-<!--/-->
-
-<!--#Refs2#-->
 <pre class="brush: clojure;">
 (def foo (ref {:me "jane", :you "?"}))
 ;= #'user/foo
@@ -183,7 +184,7 @@ Un modèle uniforme de changement d'état :
 
 <!--#Agents#-->
 <h1>Agents</h1>
-Les actions envoyés sont mis en queue
+Les actions envoyés sont mis en queue<br><br>
 <pre class="brush: clojure;">
 (def foo (agent {:me "jane", :you "?"}))
 ;= #'user/foo
@@ -195,20 +196,21 @@ Les actions envoyés sont mis en queue
 
 ; ... plus tard ...
 
-user=> @foo
-{:me "jane", :you "tar-zan"}
+@foo
+;= {:me "jane", :you "tar-zan"}
 </pre>
 <!--/-->
 
 <!--#Atoms#-->
 <h1>Atoms</h1>
 <br>
-Garantie d'atomicité sur les modifications
+Garantie d'atomicité sur les modifications<br><br>
 <pre class="brush: clojure;">
 (def foo (atom {:me "jane", :you "?"}))
-#'user/foo
-user=> (swap! foo assoc :you "tar-zan") 
-{:me "jane", :you "tar-zan"}
+;= #'user/foo
+
+(swap! foo assoc :you "tar-zan") 
+;= {:me "jane", :you "tar-zan"}
 </pre>
 <br>
 Ici aussi une mise à jour spéculative, la fonction peut-être appelée plusieurs fois.
@@ -217,69 +219,69 @@ Ici aussi une mise à jour spéculative, la fonction peut-être appelée plusieu
 <!--#Vars1#-->
 <h1>Vars</h1>
 <br>
-Ce sont tout simplement les entrées des espaces de nommages, : une correspondance entre un nom et une instance d'un des types vus : fonction, int, atom, etc<br>
+Définissent les entrées des espaces de nommages : la correspondance entre un nom et une instance d'un des types vus : fonction, int, atom, etc<br><br>
 <pre class="brush: clojure;">
 (def foo {:me "jane", :you "?"})
-#'user/foo
+;= #'user/foo
 </pre>
+<br>
+Une redéfinition est visible de l'ensemble des threads
 <!--/-->
 
 <!--#Vars2#-->
 <h1>Vars</h1>
-<br>
-Elles offrent cependant un méchanisme utile en multi-thread : le bindings par thread (et en pile) :
+Elles offrent cependant un méchanisme utile en multi-thread : le binding par thread (et en pile) :
+<br><br>
 <pre class="brush: clojure;">
 (def ^:dynamic *foo* {:me "jane", :you "?"})
 ;= #'user/*foo*
+
 (binding [*foo* {:me "jane", :you "tar-zan"}]
   (doto (Thread. #(println "not bound :" *foo*))
         .start .join)
    *foo*)
 ; not bound : {:me jane, :you ?}
 ;= {:me "jane", :you "tar-zan"}
+
 foo
 ;= {:me "jane", :you "?"}
 </pre>
 <!--/-->
 
 <!--#Résumé1#-->
+<br>
 <h1>En Résumé</h1>
+Des valeurs immutables
 <ul>
-  <li>Les valeurs immutables
-    <ul>
       <li>une notion typiquement fonctionnelle</li>
-      <li>s'avère aussi précieuse pour la gestion de la concurrence</li>
-    </ul>
-  </li>
-  <li>des structures de données persistentes pour avoir des valeurs composites immutables</li>
+      <li>qui s'avère précieuse dans la gestion de la concurrence</li>
 </ul>
-<!--/-->
-
-<!--#Résumé2#-->
-<h1>En Résumé</h1>
 <br><br>
-Un assortiment de méchanismes de synchronisation des accès en écriture<br>
-L'accès en lecture n'est jamais bloqué<br>
+Un assortiment de méchanismes de synchronisation d'écriture<br>
+Un accès en lecture qui n'est jamais bloqué<br>
 <br><br>
-<div class="centered"><big>no user locking, no deadlock !</big></div>
+<div class="centered"><big><b>Last but not least :<br>"No user locking, no deadlock !"</b></big></div>
 <!--/-->
 
 
 <!--#Parallelisme1#-->
-<h1>Parallelisme</h1>
 <br>
+<h1>Parallelisme</h1>
 On a vu (furtivement) pmap mais il existe d'autres mécanismes abstrayant la distribution de calculs sur plusieurs threads :
 <pre class="brush: clojure;">
 (pmap + [1 1] [2 2]) 
 ;= (3 3)
+
 (pvalues (+ 1 2) (+ 1 2))
 ;= (3 3)
+
 (pcalls #(+ 1 2) #(+ 1 2))
 ;= (3 3)
 </pre>
 <!--/-->
 
 <!--#Parallelisme2#-->
+<br><br>
 <pre class="brush: clojure;">
 (def d (delay (println "Running...") :done!))
 ;= #'user/d ; 

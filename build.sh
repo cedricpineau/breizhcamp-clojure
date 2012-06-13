@@ -6,7 +6,7 @@ slidekey=slides
 directory=/home/sc/Documents/Breizhcamp/Clojure_Kisses
 outputfile=$directory/index.html
 tmpfile=/tmp/index-$$.html
-step=80
+step=90
 xpos=0
 
 #nbprocess=`ps aux | grep build.sh | grep -v grep | wc -l`

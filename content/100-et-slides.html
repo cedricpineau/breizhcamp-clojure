@@ -1,6 +1,6 @@
 
 <!--#More1#-->
-<h1>Mais encore ?<br><br><big>Clojure n'est pas un langage pour la JVM !</big></h1>
+<h1>Quoi encore ?<br><br><big>Clojure n'est pas un langage pour la JVM !</big></h1>
 C'est un langage "hébergé" : JVM, CLR, Javascript, Python, ...
 <br><br><br>
 (ThoughtWorks Technology Radar de mars 2012)<br><br>
@@ -25,9 +25,9 @@ Bon si.. mais
 (defn len [x] (.length x))
 (defn len2 [^String x] (.length x))
  
-(time (reduce + (map len (repeat 1000000 "asdf"))))
+(time (reduce + (map len (repeat 1000000 "42"))))
 ; "Elapsed time: 3007.198 msecs"
-(time (reduce + (map len2 (repeat 1000000 "asdf"))))
+(time (reduce + (map len2 (repeat 1000000 "42"))))
 ; "Elapsed time: 308.045 msecs"
 </pre>
 et demain (GSOC2012) : <b>Clojure with a type system, as a library.</b><br>

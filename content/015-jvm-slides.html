@@ -56,11 +56,17 @@ On ne réécrit pas les drivers JDBC ou les serveurs Web !
 ; Bonjour BreizhCampeurs !
 ;= nil
 </pre>
-Les map, set, list et vector, respectent les Map, Set, List et Vector Java :-)<br>
-Les fonctions implementent Runnable et Callable
+<br>
+<ul>
+  <li>Les map, set, list et vector, respectent les interfaces Map, Set, List et Vector Java :-)</li>
+  <li>Les fonctions implementent Runnable et Callable</li>
+</ul>
+<br>
+
 <!--/-->
 
 <!--#Interopérable3#-->
+<br>
 <pre class="brush: clojure;">
 (import '(javax.swing JFrame JPanel JButton 
   JOptionPane) 'java.awt.event.ActionListener)
@@ -72,6 +78,7 @@ Les fonctions implementent Runnable et Callable
              (.setSize 200 200)
              (.setContentPane panel)
              (.setVisible true)))
+
 (defn say-hello []
   (JOptionPane/showMessageDialog nil 
     "Hello BreizhCampeurs !" "Greeting" 

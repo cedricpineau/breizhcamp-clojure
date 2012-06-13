@@ -13,7 +13,7 @@
 <!--#ExpressionProblem3#-->
 <br><br><br><br>
 <h1>En langage OO, il est facile d'ajouter de nouveaux types mais difficile d'ajouter des traitements<br><br>
-Le pattern Visiteur n'est qu'une demi-réponse qui nous ramène dans un mode fonctionnel : l'ajout de type nécessite de retoucher les visiteurs</h1>
+Le pattern Visiteur n'est qu'une demi réponse qui nous ramène dans un mode fonctionnel : l'ajout de type nécessite de retoucher les visiteurs</h1>
 <!--/-->
 
 <!--#Abstractions1#-->
@@ -25,7 +25,8 @@ Avant cela les Sequence, Collection, etc étaient définis en terme d'interface 
 <!--/-->
 
 <!--#Protocol1#-->
-<br><br>
+<h1>Les abstractions de constructions</h1>
+<br>
 <ul><li>Le protocole, une sorte d'interface Java</li>
 <pre class="brush: clojure;">
 (defprotocol MonProtocol
@@ -33,8 +34,8 @@ Avant cela les Sequence, Collection, etc étaient définis en terme d'interface 
   (bar [a b] "bar docs")
   (baz [a] [a b] [a b c] "baz docs"))
 </pre>
-<br>
-<li>Les "datatypes", des structures de pure donnée</li>
+<br><br>
+<li>Les "datatypes", des structures de pures données</li>
 <pre class="brush: clojure;">
 (defrecord Point [x y]) ; Le POJO clojure..
 </pre>
@@ -44,24 +45,29 @@ Avant cela les Sequence, Collection, etc étaient définis en terme d'interface 
 
 <!--#Protocol2#-->
 <br>
-Le support d'un protocole par un type donné va pouvoir se faire indépendamment de sa déclaration et des autres types supportés
+Le support d'un protocole par un type est indépendant de sa déclaration et des autres types supportés par le protocole :
 <br><br>
 <pre class="brush: clojure;">
-(extend-type Point 
+(extend-type Point ; extend/extend-protocol
   MonProtocol
     (bar [a b] a)
     (baz ([x] x) ([x y & zs] x)))
+
+(bar (Point. 1 2) :n'imp)
+;= #user.Point{:x 1, :y 2}
 </pre>
 <br>
-Ces comportements deviennent pluggables à volonté via extend ou extend-protocol (ou à la déclaration du type)<br><br>
-On peut donc déclarer des ensembles nommés de comportements d'un côté, des types de données de l'autre et les cabler de manière orthogonale
+=> Clojure permet de déclarer des ensembles nommés de comportements d'un côté, des types de données de l'autre et de cabler le tout de manière orthogonale :<br><br>
+<ul>
+<li>Sans avoir, sans modifier le code du Protocole</li>
+<li>Sans avoir, sans modifier le code du Record</li>
+<br>
 <!--/-->
 
 <!--#DataTypes2#-->
-<br>
 Les types de données offre par ailleurs un certain nombre de caractéristiques remarquables : 
 <br><br>
-- respectent l'abstraction Associative pour l'interrogation ou l'ajout de champs
+- ils sont "Associative"
 <pre class="brush: clojure;">
 (:x (Point. 2 3))
 ;= 2
@@ -69,14 +75,10 @@ Les types de données offre par ailleurs un certain nombre de caractéristiques 
 (assoc (Point. 3 4) :z 5)
 ;= #user.Point{:x 3, :y 4, :z 5}
 </pre>
-<!--/-->
-
-<!--#DataTypes3#-->
-<br><br>
-- sont immutables (more to come..)<br>
-- supportent des méta-données (comme tout le reste..)<br>
-- offre un certain nombre de constructeurs<br>
-- sont Reader-ready :
+- ils sont immutables (more to come..)<br>
+- ils supportent des méta-données (comme tout le reste..)<br>
+- ils offrent un certain nombre de constructeurs<br>
+- ils sont Reader-ready :
 <pre class="brush: clojure;">
 user=> (pr-str (Point. 2 3))
 ;= #user.Point{:x 2, :y 3}"
@@ -98,12 +100,14 @@ On connait en Java, trois formes de polymorphismes intégrés au langage :
 </ul>
 <br>
 => l'appel des méthodes est homogène et le routage de l'appel se base sur le type de l'objet sous-jacent.
+
 <!--/-->
 
 <!--#Defmulti1#-->
+<br>
 <h1>Clojure généralise le principe..<br>.. en explicitant la fonction de répartition</h1>
 Multi-méthode = f° de répartition + n [valeur, f° de traitement]
-<br>
+<br><br>
 <pre class="brush: clojure;">
 (defmulti calcul
   (fn [v] (if (<= (count v) 1000)
@@ -117,7 +121,7 @@ Multi-méthode = f° de répartition + n [valeur, f° de traitement]
 <!--/-->
 
 <!--#Defmulti2#-->
-<br>
+<br><br>
 <h1>.. en permettant la création de hierarchies adhoc</h1>
 <pre class="brush: clojure;">
 (def h (atom (-> (make-hierarchy)
@@ -135,7 +139,7 @@ Multi-méthode = f° de répartition + n [valeur, f° de traitement]
 <!--/-->
 
 <!--#Defmulti3#-->
-<br>
+<br><br>
 <h1>.. en permettant des dispatchs composites</h1>
 <br>
 <pre class="brush: clojure;">
@@ -152,7 +156,7 @@ Multi-méthode = f° de répartition + n [valeur, f° de traitement]
 <!--/-->
 
 <!--#Defmulti4#-->
-<div class="centered">All together : defrecord + defmulti</div>
+<h1>All together !<br> defrecord + defmulti</h1>
 <pre class="brush: clojure;">
 (defrecord Rectangle [longueur largeur])
 (defrecord Cercle [rayon])
