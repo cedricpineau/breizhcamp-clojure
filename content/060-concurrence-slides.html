@@ -1,7 +1,15 @@
 
+<!--#What4#-->
+
+<img src="img/jongleur4.png" width="75%" style="float: right; margin-right: 30px;" >
+
+<br><br><br>
+Axé sur la <b>Concurrence</b>
+<!--/-->
+
 <!--#Impur#-->
 <br>
-<h1>Un langage pour la concurrence</h1>
+<h1>Le problème</h1>
 Peu de programmes sont "fonctionnels", ce sont des process :
 <ul>
   <li>des effets de bord</li>
@@ -263,11 +271,15 @@ Un accès en lecture qui n'est jamais bloqué<br>
 <div class="centered"><big><b>Last but not least :<br>"No user locking, no deadlock !"</b></big></div>
 <!--/-->
 
+<!--#Résumé2#-->
+<div class="centered"><img src="img/fakerichhickey.jpg" width="90%"></div>
+<!--/-->
 
 <!--#Parallelisme1#-->
 <br>
 <h1>Parallelisme</h1>
 On a vu (furtivement) pmap mais il existe d'autres mécanismes abstrayant la distribution de calculs sur plusieurs threads :
+<br><br>
 <pre class="brush: clojure;">
 (pmap + [1 1] [2 2]) 
 ;= (3 3)
